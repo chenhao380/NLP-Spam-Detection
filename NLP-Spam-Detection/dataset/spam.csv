@@ -1,0 +1,31 @@
+message,label
+Hello how are you today?,ham
+Can we meet after class tomorrow?,ham
+Please send me the assignment notes.,ham
+Happy birthday! Hope you have a great day.,ham
+I will call you when I arrive.,ham
+Thank you for your help with the project.,ham
+Your parcel will arrive this afternoon.,ham
+Do not forget the team meeting at ten.,ham
+Dinner is ready whenever you are home.,ham
+The library book is due next Monday.,ham
+Congratulations! You won a free iPhone. Click now!,spam
+FREE entry in our weekly prize draw, reply WIN now.,spam
+Limited offer: claim your cash reward today!,spam
+You have been selected as a lucky winner!,spam
+Act fast and get free vouchers now!!!,spam
+Call this number to collect your prize.,spam
+Exclusive deal! Buy now and save big.,spam
+You won a gift card. Click here to claim.,spam
+Urgent promotion: free subscription available now.,spam
+Reply STOP to unsubscribe from this offer.,spam
+Your account is suspended. Verify at https://account-check.example,phishing
+Security alert: confirm your password immediately.,phishing
+We detected unusual login activity. Click https://secure-login.example,phishing
+Your bank needs you to verify your account now.,phishing
+Update your payment details to avoid account closure.,phishing
+Microsoft support: call urgently to fix your computer.,phishing
+Reset your password at http://fake-reset.example immediately.,phishing
+Your mailbox quota is full. Login to keep receiving email.,phishing
+Verify your identity or your account will be locked.,phishing
+Invoice attached. Open link to review secure document.,phishing
