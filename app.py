@@ -16,10 +16,18 @@ from utils.helpers import append_history, clear_history, load_history
 
 st.set_page_config(page_title="Message Guard", page_icon="🛡️", layout="wide")
 
+# ---------------------------------------------------------------------------
+# Session state defaults
+# ---------------------------------------------------------------------------
+if "started" not in st.session_state:
+    st.session_state.started = False
+
+
 def apply_theme() -> None:
     dark = st.sidebar.toggle("Dark mode", value=False)
     if dark:
         st.markdown("<style>.stApp {background:#101827;color:#e5e7eb}.stMetric {background:#1f2937}</style>", unsafe_allow_html=True)
+
 
 @st.cache_resource
 def detector() -> SpamDetector:
@@ -29,9 +37,11 @@ def detector() -> SpamDetector:
             train()
     return SpamDetector()
 
+
 @st.cache_data
 def metrics() -> dict:
     return json.loads(METRICS_PATH.read_text(encoding="utf-8")) if METRICS_PATH.exists() else {}
+
 
 def result_pdf(message: str, result: dict) -> bytes:
     """Make a small downloadable report for one result."""
@@ -44,6 +54,7 @@ def result_pdf(message: str, result: dict) -> bytes:
         text.textLine(line)
     pdf.drawText(text); pdf.save(); return buffer.getvalue()
 
+
 def home() -> None:
     st.title("🛡️ Welcome to Message Guard")
     st.subheader("AI-Powered Spam and Phishing Detection System")
@@ -52,9 +63,15 @@ def home() -> None:
     Welcome to **Message Guard**, an AI-powered web application designed to help users identify whether a message or email is **Safe**, **Spam**, or **Phishing**.
 
     The system uses **Natural Language Processing (NLP)** and **Machine Learning** to analyse messages and provide a prediction, confidence score, risk level, and explanation.
-
-    Use the navigation menu on the left to explore the system features.
     """)
+
+    if not st.session_state.started:
+        st.info("👉 Click **Get Started** below to unlock the navigation menu and access the full application.")
+        if st.button("🚀 Get Started", type="primary", use_container_width=True):
+            st.session_state.started = True
+            st.rerun()
+    else:
+        st.success("✅ You're all set! Use the navigation menu on the left to explore the system features.")
 
     st.divider()
 
@@ -120,7 +137,9 @@ def home() -> None:
     5. The analysis is saved to the local prediction history.
     """)
 
-    st.success("👉 Get started by selecting **Analyze Message** from the navigation menu.")
+    if st.session_state.started:
+        st.success("👉 Get started by selecting **Analyze Message** from the navigation menu.")
+
 
 def analyze() -> None:
     st.title("Analyze Message")
@@ -256,6 +275,7 @@ def analyze() -> None:
         "application/pdf"
     )
 
+
 def dashboard() -> None:
     st.title("Statistics Dashboard")
     data, info, history = pd.read_csv(DATASET_PATH), metrics(), load_history()
@@ -273,6 +293,7 @@ def dashboard() -> None:
     else:
         st.info("Analyse messages to populate prediction activity charts.")
 
+
 def history_page() -> None:
     st.title("Prediction History")
     history = load_history(); search = st.text_input("Search messages or predictions")
@@ -283,11 +304,30 @@ def history_page() -> None:
     if st.button("Delete all history"):
         clear_history(); st.rerun()
 
+
 def about() -> None:
     st.title("About")
     st.write("This educational project compares Multinomial Naive Bayes, Logistic Regression, and SVM on TF-IDF features. The best weighted-F1 model is saved locally.")
     st.warning("Predictions are decision support, not a replacement for security controls. Do not open unexpected links or disclose credentials.")
 
+
 apply_theme()
-page = st.sidebar.radio("Navigate", ["Home", "Analyze Message", "Dashboard", "History", "About"])
-{"Home": home, "Analyze Message": analyze, "Dashboard": dashboard, "History": history_page, "About": about}[page]()
+
+pages = {
+    "Home": home,
+    "Analyze Message": analyze,
+    "Dashboard": dashboard,
+    "History": history_page,
+    "About": about,
+}
+
+if st.session_state.started:
+    # Full navigation unlocked after "Get Started"
+    page = st.sidebar.radio("Navigate", list(pages.keys()))
+else:
+    # Only Home is accessible before "Get Started" is clicked
+    st.sidebar.radio("Navigate", ["Home"], disabled=True)
+    st.sidebar.caption("🔒 Click **Get Started** on the Home page to unlock the other sections.")
+    page = "Home"
+
+pages[page]()
