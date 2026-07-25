@@ -20,6 +20,16 @@ if "started" not in st.session_state:
 if "nav_page" not in st.session_state:
     st.session_state.nav_page = "Home"
 
+# The "Get Started" button lives inside the hero's HTML component (so it's
+# visually one piece with the background) rather than as a normal Streamlit
+# button. A component iframe can't call Streamlit callbacks directly, so the
+# button is a plain link that navigates the *parent* page to `?start=1`;
+# we catch that here and translate it into normal session-state navigation.
+if st.query_params.get("start") == "1":
+    st.session_state.started = True
+    st.session_state.nav_page = "Analyze Message"
+    st.query_params.clear()
+
 st.set_page_config(
     page_title="Message Guard",
     page_icon="🛡️",
@@ -227,6 +237,33 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_hei
             margin: 0 auto;
         }}
 
+        /* "Get Started" is a real link baked into the hero markup, styled
+           to match the app's primary-button look, so it reads as one
+           integrated piece with the background rather than a separate
+           Streamlit widget sitting below it. */
+        .hero-cta {{
+            display: inline-block;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, #f6821f, #ff9d3d);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            padding: 0.85rem 2.3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(246, 130, 31, 0.35);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+            cursor: pointer;
+        }}
+        .hero-cta:hover {{
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(246, 130, 31, 0.45);
+            background: linear-gradient(135deg, #e0740f, #f6821f);
+        }}
+        .hero-cta:active {{
+            transform: translateY(0) scale(0.98);
+        }}
+
         @media (max-width: 640px) {{
             .hero-inner {{ padding: 1.75rem 1rem; }}
         }}
@@ -241,6 +278,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_hei
           AI-powered spam and phishing detection system that analyses emails and
           messages using NLP and Machine Learning.
         </p>
+        <a href="?start=1" target="_parent" class="hero-cta">Get Started →</a>
       </div>
     </div>
 
@@ -502,17 +540,6 @@ def home() -> None:
     )
 
     render_hero("EMAIL DETECTION", dark=True)
-
-    st.markdown(
-        '<div style="max-width:1000px; margin:0 auto; padding:1.5rem 1rem 3rem;">',
-        unsafe_allow_html=True,
-    )
-    _, mid, _ = st.columns([1, 1, 1])
-    with mid:
-        if st.button("Get Started", type="primary", use_container_width=True):
-            st.session_state.started = True
-            go_to("Analyze Message")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 
 def analyze() -> None:
