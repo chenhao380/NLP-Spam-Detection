@@ -15,17 +15,19 @@ from predict import SpamDetector
 from train_model import train
 from utils.helpers import append_history, clear_history, load_history
 
-st.set_page_config(page_title="Message Guard", page_icon="🛡️", layout="wide")
-
-PAGES = ["Home", "Analyze Message", "Dashboard", "History", "About"]
-
-# ---------------------------------------------------------------------------
-# Session state defaults
-# ---------------------------------------------------------------------------
 if "started" not in st.session_state:
     st.session_state.started = False
 if "nav_page" not in st.session_state:
     st.session_state.nav_page = "Home"
+
+st.set_page_config(
+    page_title="Message Guard",
+    page_icon="🛡️",
+    layout="wide",
+    initial_sidebar_state="expanded" if st.session_state.started else "collapsed",
+)
+
+PAGES = ["Home", "Analyze Message", "Dashboard", "History", "About"]
 
 
 # ---------------------------------------------------------------------------
@@ -131,7 +133,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
         .hero-wrap {{
             position: relative;
             width: 100%;
-            min-height: 620px;
+            min-height: 430px;
             border-radius: 14px;
             overflow: hidden;
             background: {bg};
@@ -172,8 +174,12 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
             pointer-events: none;
             mask-image: radial-gradient(circle at 50% 45%, transparent 0%, transparent 28%, black 60%, black 100%);
         }}
+        .hero-glyphs span {{
+            transition: color 1.1s ease-out;
+        }}
         .hero-glyphs span.flash {{
             color: {glyph_flash};
+            transition: color 0.05s ease-out;
         }}
 
         .hero-inner {{
@@ -213,7 +219,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
         }}
 
         @media (max-width: 640px) {{
-            .hero-wrap {{ min-height: 520px; border-radius: 10px; }}
+            .hero-wrap {{ min-height: 380px; border-radius: 10px; }}
             .hero-inner {{ padding: 1.75rem 1rem; }}
         }}
       </style>
@@ -346,7 +352,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
                         if (!span) continue;
                         span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
                         span.classList.add('flash');
-                        setTimeout(((s) => () => s.classList.remove('flash'))(span), 260);
+                        setTimeout(((s) => () => s.classList.remove('flash'))(span), 90);
                     }}
                 }}
             }});
@@ -354,7 +360,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
       }})();
     </script>
     """
-    components.html(html, height=660, scrolling=False)
+    components.html(html, height=470, scrolling=False)
 
 
 def apply_theme() -> None:
@@ -675,31 +681,33 @@ pages = {
 }
 
 NAV_ICONS = {
-    "Home": "🏠",
     "Analyze Message": "🔍",
     "Dashboard": "📊",
     "History": "🕘",
     "About": "ℹ️",
 }
+NAV_ITEMS = ["Analyze Message", "Dashboard", "History", "About"]
 
 if st.session_state.started:
-    # Full navigation unlocked after "Get Started"
-    current_index = PAGES.index(st.session_state.nav_page) if st.session_state.nav_page in PAGES else 0
+    if st.sidebar.button("← Back to Home", use_container_width=True):
+        st.session_state.started = False
+        go_to("Home")
+
     st.sidebar.markdown("#### Navigate")
+    current_index = (
+        NAV_ITEMS.index(st.session_state.nav_page)
+        if st.session_state.nav_page in NAV_ITEMS
+        else 0
+    )
     selected = st.sidebar.radio(
         "Navigate",
-        PAGES,
+        NAV_ITEMS,
         index=current_index,
         format_func=lambda p: f"{NAV_ICONS.get(p, '')}  {p}",
         label_visibility="collapsed",
     )
     if selected != st.session_state.nav_page:
         st.session_state.nav_page = selected
-else:
-    # Locked state: plain static text (no disabled widget, avoids hover glitches)
-    st.sidebar.markdown("#### Navigate")
-    st.sidebar.markdown("🏠  Home")
-    st.sidebar.caption("Click Get Started on the Home page to unlock the other sections.")
-    st.session_state.nav_page = "Home"
+# else: nothing rendered in the sidebar on Home — it stays collapsed
 
 pages[st.session_state.nav_page]()
