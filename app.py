@@ -102,7 +102,28 @@ GLOBAL_CSS = """
 # Rendered as a self-contained HTML component (own CSS + JS, no Streamlit
 # rerun involved) so the scramble animation is instant and client-side only.
 # ---------------------------------------------------------------------------
-def render_hero(title: str = "EMAIL DETECTION") -> None:
+def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
+    # Theme tokens: plain white surface in light mode, plain black in dark
+    # mode (no gradient wash) so the toggle reads clearly as two states.
+    if dark:
+        bg = "#000000"
+        grid_line = "rgba(255, 255, 255, 0.07)"
+        glyph_color = "rgba(255, 255, 255, 0.16)"
+        glyph_flash = "rgba(246, 130, 31, 0.55)"
+        title_color = "#f5f7fa"
+        title_glow = "rgba(56, 189, 248, 0.25)"
+        sub_color = "#aab3c2"
+        icon_glow = "rgba(56, 189, 248, 0.45)"
+    else:
+        bg = "#ffffff"
+        grid_line = "rgba(15, 23, 42, 0.06)"
+        glyph_color = "rgba(15, 23, 42, 0.10)"
+        glyph_flash = "rgba(246, 130, 31, 0.65)"
+        title_color = "#14181f"
+        title_glow = "rgba(246, 130, 31, 0.12)"
+        sub_color = "#5b6472"
+        icon_glow = "rgba(246, 130, 31, 0.35)"
+
     html = f"""
     <div class="hero-wrap">
       <style>
@@ -113,10 +134,7 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
             min-height: 380px;
             border-radius: 14px;
             overflow: hidden;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.10), transparent 45%),
-                radial-gradient(circle at 80% 30%, rgba(246, 130, 31, 0.10), transparent 40%),
-                linear-gradient(160deg, #0b0f1a 0%, #10182b 55%, #0b0f1a 100%);
+            background: {bg};
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,10 +151,29 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(148, 197, 255, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 197, 255, 0.06) 1px, transparent 1px);
+                linear-gradient({grid_line} 1px, transparent 1px),
+                linear-gradient(90deg, {grid_line} 1px, transparent 1px);
             background-size: 32px 32px;
             mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 75%);
+        }}
+
+        /* background "garbled code" layer: a grid of faint monospace
+           glyphs, a handful of which flicker to a random character (and
+           to the accent colour) every tick, like static behind the title */
+        .hero-glyphs {{
+            position: absolute;
+            inset: 0;
+            display: grid;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 12px;
+            line-height: 1;
+            color: {glyph_color};
+            user-select: none;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at 50% 45%, transparent 0%, transparent 28%, black 60%, black 100%);
+        }}
+        .hero-glyphs span.flash {{
+            color: {glyph_flash};
         }}
 
         .hero-inner {{
@@ -150,17 +187,17 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
         .hero-icon {{
             font-size: 2.4rem;
             margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45));
+            filter: drop-shadow(0 0 10px {icon_glow});
         }}
 
         .glitch-title {{
             font-size: clamp(2.1rem, 6vw, 3.6rem);
             font-weight: 800;
             letter-spacing: 0.06em;
-            color: #f5f7fa;
+            color: {title_color};
             margin: 0 0 0.9rem 0;
             cursor: default;
-            text-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+            text-shadow: 0 0 18px {title_glow};
             user-select: none;
         }}
         .glitch-title span.char {{
@@ -170,7 +207,7 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
 
         .hero-sub {{
             font-size: clamp(0.92rem, 2vw, 1.05rem);
-            color: #aab3c2;
+            color: {sub_color};
             line-height: 1.6;
             margin: 0 auto;
         }}
@@ -182,6 +219,7 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
       </style>
 
       <div class="hero-grid"></div>
+      <div class="hero-glyphs" id="heroGlyphs"></div>
       <div class="hero-inner">
         <div class="hero-icon">🛡️</div>
         <h1 class="glitch-title" id="glitchTitle"></h1>
@@ -220,7 +258,6 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
             const spans = Array.from(el.querySelectorAll('.char'));
             const total = spans.length;
             const revealDelayPerChar = 55; // ms between each letter locking in
-            const scrambleTickMs = 40;
             let startTime = performance.now();
 
             function tick(now) {{
@@ -257,21 +294,64 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
         buildSpans(target);
         el.addEventListener('mouseenter', playScramble);
         el.addEventListener('mouseleave', resetTitle);
+
+        // ---- background glyph noise ("garbled code" backdrop) ----
+        (function() {{
+            const wrap = document.querySelector('.hero-wrap');
+            const layer = document.getElementById('heroGlyphs');
+            const cell = 22; // px per glyph cell
+            const noiseChars = "01AXF$#%&*<>/\\\\{{}}[]=+;:";
+
+            function buildGrid() {{
+                const cols = Math.ceil(wrap.clientWidth / cell);
+                const rows = Math.ceil(wrap.clientHeight / cell);
+                layer.style.gridTemplateColumns = `repeat(${{cols}}, ${{cell}}px)`;
+                layer.style.gridTemplateRows = `repeat(${{rows}}, ${{cell}}px)`;
+                layer.innerHTML = "";
+                const total = cols * rows;
+                for (let i = 0; i < total; i++) {{
+                    const span = document.createElement('span');
+                    span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
+                    span.style.textAlign = 'center';
+                    layer.appendChild(span);
+                }}
+            }}
+
+            buildGrid();
+            window.addEventListener('resize', buildGrid);
+
+            // periodically flicker a handful of cells to a new (and briefly
+            // accent-coloured) character, then let them settle back down
+            setInterval(function() {{
+                const spans = layer.children;
+                if (!spans.length) return;
+                const hits = 6 + Math.floor(Math.random() * 8);
+                for (let n = 0; n < hits; n++) {{
+                    const idx = Math.floor(Math.random() * spans.length);
+                    const span = spans[idx];
+                    span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
+                    span.classList.add('flash');
+                    setTimeout(((s) => () => s.classList.remove('flash'))(span), 220);
+                }}
+            }}, 160);
+        }})();
       }})();
     </script>
     """
     components.html(html, height=420, scrolling=False)
 
 
-def apply_theme() -> None:
+def apply_theme() -> bool:
     st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
     dark = st.sidebar.toggle("Dark mode", value=False)
+    st.session_state.dark_mode = dark
     if dark:
         st.markdown(
             "<style>.stApp {background:#101827;color:#e5e7eb}"
             "div[data-testid='stMetric'] {background:#1f2937;border-color:#2d3748}</style>",
             unsafe_allow_html=True,
         )
+    return dark
 
 
 @st.cache_resource
@@ -307,7 +387,7 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
-    render_hero("EMAIL DETECTION")
+    render_hero("EMAIL DETECTION", dark=st.session_state.get("dark_mode", False))
 
     _, mid, _ = st.columns([1, 1, 1])
     with mid:
