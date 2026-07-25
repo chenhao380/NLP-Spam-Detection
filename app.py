@@ -94,14 +94,6 @@ GLOBAL_CSS = """
     div[data-testid="stMetric"]:hover {
         box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
-    /* let long metric values wrap onto a second line instead of being
-       clipped with an ellipsis (e.g. "Safe · Spam · Phishing") */
-    div[data-testid="stMetricValue"] {
-        white-space: normal !important;
-        overflow-wrap: break-word;
-        line-height: 1.25;
-        font-size: 1.5rem !important;
-    }
 </style>
 """
 
@@ -162,7 +154,6 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
         }}
 
         .glitch-title {{
-            position: relative;
             font-size: clamp(2.1rem, 6vw, 3.6rem);
             font-weight: 800;
             letter-spacing: 0.06em;
@@ -175,52 +166,6 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
         .glitch-title span.char {{
             display: inline-block;
             min-width: 0.15em;
-        }}
-
-        /* CSS-only fallback: chromatic-split + jitter on hover.
-           Runs purely on :hover so it fires even if, for any reason,
-           the browser did not execute the scramble script below. */
-        .glitch-title::before,
-        .glitch-title::after {{
-            content: attr(data-text);
-            position: absolute;
-            left: 0; top: 0; width: 100%; height: 100%;
-            opacity: 0;
-            pointer-events: none;
-        }}
-        .glitch-title:hover {{
-            animation: cfShake 0.4s steps(2, end) infinite;
-        }}
-        .glitch-title:hover::before {{
-            opacity: 0.75;
-            color: #38bdf8;
-            clip-path: inset(0 0 55% 0);
-            animation: cfGlitchTop 0.5s steps(2, end) infinite;
-        }}
-        .glitch-title:hover::after {{
-            opacity: 0.75;
-            color: #f6821f;
-            clip-path: inset(55% 0 0 0);
-            animation: cfGlitchBottom 0.5s steps(2, end) infinite;
-        }}
-        @keyframes cfShake {{
-            0% {{ transform: translate(0,0); }}
-            25% {{ transform: translate(-1px,1px); }}
-            50% {{ transform: translate(1px,-1px); }}
-            75% {{ transform: translate(-1px,-1px); }}
-            100% {{ transform: translate(0,0); }}
-        }}
-        @keyframes cfGlitchTop {{
-            0% {{ transform: translate(0,0); }}
-            33% {{ transform: translate(-4px,-1px); }}
-            66% {{ transform: translate(3px,1px); }}
-            100% {{ transform: translate(0,0); }}
-        }}
-        @keyframes cfGlitchBottom {{
-            0% {{ transform: translate(0,0); }}
-            33% {{ transform: translate(4px,1px); }}
-            66% {{ transform: translate(-3px,-1px); }}
-            100% {{ transform: translate(0,0); }}
         }}
 
         .hero-sub {{
@@ -239,7 +184,7 @@ def render_hero(title: str = "EMAIL DETECTION") -> None:
       <div class="hero-grid"></div>
       <div class="hero-inner">
         <div class="hero-icon">🛡️</div>
-        <h1 class="glitch-title" id="glitchTitle" data-text="{title}">{title}</h1>
+        <h1 class="glitch-title" id="glitchTitle"></h1>
         <p class="hero-sub">
           AI-powered spam and phishing detection system that analyses emails and
           messages using NLP and Machine Learning.
