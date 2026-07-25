@@ -4,6 +4,7 @@ from io import BytesIO
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import streamlit.components.v1 as components
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from email import policy
@@ -28,11 +29,22 @@ if "nav_page" not in st.session_state:
 
 
 # ---------------------------------------------------------------------------
-# Cloudflare-inspired look & feel
+# Global styling (applies outside the hero iframe: buttons, cards, layout)
 # ---------------------------------------------------------------------------
-CLOUDFLARE_CSS = """
+GLOBAL_CSS = """
 <style>
-    /* ---- global type & spacing, Cloudflare learning-center feel ---- */
+    :root {
+        --cf-color-bg: #faf8f3;
+        --cf-color-surface: #ffffff;
+        --cf-color-border-100: #e4ddcf;
+        --cf-color-border-200: #cdc2ac;
+        --cf-color-ink-900: #201d18;
+        --cf-color-ink-500: #6f6558;
+        --cf-color-accent-100: #fbe3c8;
+        --cf-color-accent-500: #f6821f;
+        --cf-color-accent-600: #d06c11;
+    }
+
     html, body, [class*="css"]  {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -41,85 +53,276 @@ CLOUDFLARE_CSS = """
         background-color: #ffffff;
     }
 
-    /* tone down Streamlit's default header spacing */
     .block-container {
-        padding-top: 2.5rem;
+        padding-top: 1.5rem;
         padding-bottom: 3rem;
         max-width: 1000px;
     }
 
-    /* section dividers, subtle like cloudflare's hairlines */
     hr {
         border: none;
         border-top: 1px solid #e5e7eb;
         margin: 2rem 0;
     }
 
-    /* Cloudflare orange for primary buttons */
-    .stButton > button[kind="primary"] {
-        background-color: #f6821f;
-        border: none;
-        border-radius: 4px;
-        color: #ffffff;
-        font-weight: 600;
-        padding: 0.65rem 1.4rem;
+    /* fade-in-up animation applied to page sections as they render */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
-    .stButton > button[kind="primary"]:hover {
-        background-color: #d96f11;
-        color: #ffffff;
+    .cf-fade {
+        animation: fadeInUp 0.6s ease-out both;
     }
 
-    /* card look for metrics / info blocks */
+    /* ---------------------------------------------------------------
+       Hero framing: full-bleed dashed rules + light dot-grid backdrop
+       --------------------------------------------------------------- */
+    .cf-dashed-line {
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+        border-top: 1px dashed var(--cf-color-border-200);
+        height: 0;
+    }
+    .cf-hero-frame {
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+        background-color: var(--cf-color-bg);
+        background-image: radial-gradient(var(--cf-color-border-100) 1px, transparent 1px);
+        background-size: 20px 20px;
+        padding: 0.5rem 1rem 1.75rem;
+        display: flex;
+        justify-content: center;
+    }
+    .cf-hero-frame-inner {
+        width: 100%;
+        max-width: 620px;
+    }
+    /* screen-reader-only heading: keeps a real <h1> for accessibility
+       without showing literal title text in the visual design */
+    .cf-sr-only {
+        position: absolute;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .cf-hero-copy {
+        text-align: center;
+        max-width: 480px;
+        margin: 0.6rem auto 1.25rem;
+        color: var(--cf-color-ink-500);
+        font-size: 1.02rem;
+        line-height: 1.55;
+    }
+
+    /* Get Started / primary buttons: pill-shaped, orange gradient */
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, var(--cf-color-accent-500), #ff9d3d);
+        border: none;
+        border-radius: 999px;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1.0rem;
+        padding: 0.7rem 1.7rem;
+        box-shadow: 0 4px 14px rgba(246, 130, 31, 0.35);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .stButton > button[kind="primary"]:hover {
+        transform: translateY(-2px) scale(1.015);
+        box-shadow: 0 0 0 6px var(--cf-color-accent-100), 0 8px 22px rgba(246, 130, 31, 0.4);
+        background: linear-gradient(135deg, var(--cf-color-accent-600), var(--cf-color-accent-500));
+        color: #ffffff;
+    }
+    .stButton > button[kind="primary"]:active {
+        transform: translateY(0px) scale(0.99);
+    }
+
+    /* secondary pill button: outlined, transparent */
+    .stButton > button:not([kind="primary"]) {
+        background: transparent;
+        border: 1.5px solid var(--cf-color-border-200);
+        border-radius: 999px;
+        color: var(--cf-color-ink-900);
+        font-weight: 600;
+        font-size: 1.0rem;
+        padding: 0.7rem 1.7rem;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .stButton > button:not([kind="primary"]):hover {
+        border-color: var(--cf-color-accent-500);
+        box-shadow: 0 0 0 5px var(--cf-color-accent-100);
+        transform: translateY(-2px);
+        color: var(--cf-color-ink-900);
+    }
+    .stButton > button:not([kind="primary"]):active {
+        transform: translateY(0px);
+    }
+
     div[data-testid="stMetric"] {
         background: #fafafa;
         border: 1px solid #ececec;
         border-radius: 8px;
         padding: 0.9rem 1rem;
+        transition: box-shadow 0.2s ease;
     }
-
-    /* --- hero block for the Home / landing page --- */
-    .cf-hero {
-        text-align: center;
-        padding: 3.5rem 1rem 2.5rem 1rem;
+    div[data-testid="stMetric"]:hover {
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
-    .cf-hero .cf-icon {
-        font-size: 3.2rem;
-        line-height: 1;
-        margin-bottom: 0.75rem;
-    }
-    .cf-hero h1 {
-        font-size: 2.1rem;
-        font-weight: 700;
-        color: #14181f;
-        margin-bottom: 0.4rem;
-    }
-    .cf-hero p.cf-sub {
-        font-size: 1.05rem;
-        color: #4b5563;
-        max-width: 560px;
-        margin: 0 auto 0.25rem auto;
-        line-height: 1.55;
-    }
-
-    .cf-card {
-        border: 1px solid #ececec;
-        border-radius: 8px;
-        padding: 1.4rem 1.6rem;
-        background: #fcfcfc;
-        margin-bottom: 1rem;
+    /* let long metric values wrap onto a second line instead of being
+       clipped with an ellipsis (e.g. "Safe · Spam · Phishing") */
+    div[data-testid="stMetricValue"] {
+        white-space: normal !important;
+        overflow-wrap: break-word;
+        line-height: 1.25;
+        font-size: 1.5rem !important;
     }
 </style>
 """
 
+# ---------------------------------------------------------------------------
+# Hero illustration: a small canvas animation standing in for the wordmark.
+# The literal "Message Guard" title is kept as an sr-only <h1> in the outer
+# page (see home()) so screen readers still get a real heading, while the
+# visual focus is this scanning-radar sketch, faded out at the edges with a
+# radial mask so it blends into the dot-grid backdrop behind it.
+# ---------------------------------------------------------------------------
+def render_hero_illustration() -> None:
+    html = """
+    <div class="cf-illo-wrap">
+      <style>
+        * { box-sizing: border-box; }
+        html, body { margin: 0; background: transparent; }
+        .cf-illo-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            animation: cfIlloFade 0.8s ease-out both;
+        }
+        @keyframes cfIlloFade {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .cf-illo-mask {
+            width: 320px;
+            height: 200px;
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 90%);
+            mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 90%);
+        }
+        canvas { display: block; }
+      </style>
+      <div class="cf-illo-mask">
+        <canvas id="cfIllo" width="320" height="200"></canvas>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const canvas = document.getElementById('cfIllo');
+        const ctx = canvas.getContext('2d');
+        const cx = canvas.width / 2, cy = canvas.height / 2;
+        const ringColor = 'rgba(205, 194, 172, 0.55)';
+        const sweepColor = 'rgba(246, 130, 31, 0.28)';
+        const safeColor = '#cdc2ac';
+        const flagColor = '#f6821f';
+
+        // orbiting "messages": most are calm dots, one periodically flags
+        const dots = Array.from({ length: 9 }, (_, i) => ({
+            radius: 34 + (i % 3) * 26,
+            angle: (i / 9) * Math.PI * 2,
+            speed: 0.004 + (i % 3) * 0.0015,
+            flagged: false,
+        }));
+        let sweepAngle = 0;
+        let flagTimer = 0;
+        let flaggedIndex = 2;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // concentric radar rings
+            for (let r = 26; r <= 86; r += 20) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.strokeStyle = ringColor;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // rotating sweep wedge
+            sweepAngle += 0.018;
+            const grad = ctx.createConicGradient
+                ? ctx.createConicGradient(sweepAngle, cx, cy)
+                : null;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, 86, sweepAngle, sweepAngle + 0.9);
+            ctx.closePath();
+            ctx.fillStyle = sweepColor;
+            ctx.fill();
+            ctx.restore();
+
+            // center shield glyph
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 10);
+            ctx.lineTo(cx + 8, cy - 5);
+            ctx.lineTo(cx + 8, cy + 6);
+            ctx.quadraticCurveTo(cx, cy + 14, cx, cy + 14);
+            ctx.quadraticCurveTo(cx, cy + 14, cx - 8, cy + 6);
+            ctx.lineTo(cx - 8, cy - 5);
+            ctx.closePath();
+            ctx.fillStyle = '#3d372c';
+            ctx.fill();
+
+            // orbiting message dots; one flags red-orange when swept
+            flagTimer += 1;
+            if (flagTimer > 150) {
+                flagTimer = 0;
+                flaggedIndex = Math.floor(Math.random() * dots.length);
+            }
+            dots.forEach((d, i) => {
+                d.angle += d.speed;
+                const x = cx + Math.cos(d.angle) * d.radius;
+                const y = cy + Math.sin(d.angle) * d.radius * 0.6;
+                const isFlagged = i === flaggedIndex && flagTimer < 60;
+                ctx.beginPath();
+                ctx.arc(x, y, isFlagged ? 4.5 : 3, 0, Math.PI * 2);
+                ctx.fillStyle = isFlagged ? flagColor : safeColor;
+                ctx.fill();
+                if (isFlagged) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, 8, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(246, 130, 31, 0.4)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+            });
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+    """
+    components.html(html, height=210, scrolling=False)
+
 
 def apply_theme() -> None:
-    st.markdown(CLOUDFLARE_CSS, unsafe_allow_html=True)
+    st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
     dark = st.sidebar.toggle("Dark mode", value=False)
     if dark:
         st.markdown(
             "<style>.stApp {background:#101827;color:#e5e7eb}"
-            ".stMetric, div[data-testid='stMetric'], .cf-card {background:#1f2937;border-color:#2d3748}"
-            ".cf-hero h1 {color:#f3f4f6}.cf-hero p.cf-sub{color:#cbd5e1}</style>",
+            "div[data-testid='stMetric'] {background:#1f2937;border-color:#2d3748}</style>",
             unsafe_allow_html=True,
         )
 
@@ -157,28 +360,35 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
-    # --- hero section, Cloudflare-style: big icon + big title + short line ---
+    st.markdown('<div class="cf-dashed-line"></div>', unsafe_allow_html=True)
     st.markdown(
-        """
-        <div class="cf-hero">
-            <div class="cf-icon">🛡️</div>
-            <h1>Email Detection</h1>
-            <p class="cf-sub">
-                Message Guard uses AI to tell you whether a message or email is
-                <strong>Safe</strong>, <strong>Spam</strong>, or <strong>Phishing</strong> —
-                instantly, with a clear explanation for every result.
-            </p>
-        </div>
-        """,
+        '<div class="cf-hero-frame"><div class="cf-hero-frame-inner">',
         unsafe_allow_html=True,
     )
 
-    _, mid, _ = st.columns([1, 1, 1])
-    with mid:
+    render_hero_illustration()
+
+    st.markdown(
+        '<h1 class="cf-sr-only">Message Guard — AI Email &amp; SMS Threat Detection</h1>'
+        '<p class="cf-hero-copy">Paste a message and get an instant read on '
+        'whether it&rsquo;s safe, spam, or phishing.</p>',
+        unsafe_allow_html=True,
+    )
+
+    _, c1, c2, _ = st.columns([1.1, 1, 1, 1.1])
+    with c1:
         if st.button("Get Started", type="primary", use_container_width=True):
             st.session_state.started = True
             go_to("Analyze Message")
+    with c2:
+        if st.button("See How It Works", use_container_width=True):
+            st.session_state.started = True
+            go_to("About")
 
+    st.markdown('</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="cf-dashed-line"></div>', unsafe_allow_html=True)
+
+    st.markdown('<div class="cf-fade">', unsafe_allow_html=True)
     st.divider()
 
     st.markdown("## System Overview")
@@ -221,6 +431,7 @@ def home() -> None:
     5. The analysis is saved to the local prediction history.
     """
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 def analyze() -> None:
@@ -410,8 +621,7 @@ if st.session_state.started:
     if selected != st.session_state.nav_page:
         st.session_state.nav_page = selected
 else:
-    # Locked state: no interactive/disabled widget (avoids the hover glitch),
-    # just a plain caption explaining how to unlock the rest of the app.
+    # Locked state: plain static text (no disabled widget, avoids hover glitches)
     st.sidebar.markdown("**Navigate**")
     st.sidebar.markdown("Home")
     st.sidebar.caption("Click Get Started on the Home page to unlock the other sections.")
