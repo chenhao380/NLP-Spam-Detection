@@ -43,13 +43,82 @@ def result_pdf(message: str, result: dict) -> bytes:
     pdf.drawText(text); pdf.save(); return buffer.getvalue()
 
 def home() -> None:
-    st.title("🛡️ Message Guard")
-    st.subheader("AI-powered spam and phishing detection")
-    st.write("Analyse messages with NLP and machine learning, understand the risk signals, and keep a private local history.")
+    st.title("🛡️ Welcome to Message Guard")
+    st.subheader("AI-Powered Spam and Phishing Detection System")
+
+    st.write("""
+    Welcome to **Message Guard**, an AI-powered web application designed to help users identify whether a message or email is **Safe**, **Spam**, or **Phishing**.
+
+    The system uses **Natural Language Processing (NLP)** and **Machine Learning** to analyse messages and provide a prediction, confidence score, risk level, and explanation.
+
+    Use the navigation menu on the left to explore the system features.
+    """)
+
+    st.divider()
+
+    st.markdown("## 📌 System Overview")
+
     cols = st.columns(3)
-    for col, label, value in zip(cols, ["Classes", "Best model", "Training rows"], ["Safe · Spam · Phishing", metrics().get("best_model", "Train model"), metrics().get("dataset_rows", "—")]):
-        col.metric(label, value)
-    st.info("Start at **Analyze Message**. Train or retrain the model with `python train_model.py` whenever you update the dataset.")
+
+    cols[0].metric(
+        "Detection Classes",
+        "Safe · Spam · Phishing"
+    )
+
+    cols[1].metric(
+        "Best AI Model",
+        metrics().get("best_model", "Train model")
+    )
+
+    cols[2].metric(
+        "Training Dataset",
+        metrics().get("dataset_rows", "—")
+    )
+
+    st.divider()
+
+    st.markdown("## 📂 Navigation Guide")
+
+    st.markdown("""
+    ### 🏠 Home
+    Learn about the purpose of Message Guard and view system information.
+
+    ### 🔍 Analyze Message
+    Paste an email or text message to detect whether it is **Safe**, **Spam**, or **Phishing**. The system will display:
+    - Prediction result
+    - Confidence score
+    - Risk score and risk level
+    - Explanation
+    - Suspicious keywords and URLs
+    - Downloadable PDF report
+
+    ### 📊 Dashboard
+    View statistics and model performance, including:
+    - Dataset class distribution
+    - Machine learning model comparison
+    - Daily analysis activity
+    - Risk score distribution
+
+    ### 🕒 History
+    View, search, export, or delete previous prediction records.
+
+    ### ℹ️ About
+    Learn about the technologies used, machine learning models, and project purpose.
+    """)
+
+    st.divider()
+
+    st.markdown("## ⚙️ How Message Guard Works")
+
+    st.markdown("""
+    1. Paste a message or email into **Analyze Message**.
+    2. The system preprocesses the text using NLP techniques.
+    3. The trained machine learning model analyses the message.
+    4. A prediction, confidence score, risk score, and explanation are generated.
+    5. The analysis is saved to the local prediction history.
+    """)
+
+    st.success("👉 Get started by selecting **Analyze Message** from the navigation menu.")
 
 def analyze() -> None:
     st.title("Analyze Message")
