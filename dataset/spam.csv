@@ -895,3 +895,100 @@ I have saved the important documents.,ham
 Please inform the team about the changes.,ham
 The appointment reminder has been received.,ham
 I will continue working on the project tomorrow.,ham
+message,label
+Hello how are you today?,ham
+Can we meet after class tomorrow?,ham
+Please send me the assignment notes.,ham
+Happy birthday! Hope you have a great day.,ham
+I will call you when I arrive.,ham
+Thank you for your help with the project.,ham
+Your parcel will arrive this afternoon.,ham
+Do not forget the team meeting at ten.,ham
+Dinner is ready whenever you are home.,ham
+The library book is due next Monday.,ham
+See you at the coffee shop around noon.,ham
+I attached the slides from yesterday's lecture.,ham
+Could you review my draft before I submit it?,ham
+The exam results will be posted on Friday.,ham
+Mom called and said she is doing well.,ham
+Let me know if you need a ride to campus.,ham
+I finished the lab report and uploaded it.,ham
+Are we still on for study group tonight?,ham
+The weather looks nice for the weekend hike.,ham
+Please confirm your attendance for the workshop.,ham
+I left your textbook on the kitchen table.,ham
+Thanks for covering my shift last week.,ham
+The professor moved the deadline to next Wednesday.,ham
+Can you pick up milk on your way home?,ham
+I enjoyed our conversation at the conference.,ham
+Your dentist appointment is confirmed for Tuesday at 3pm.,ham
+The team approved your leave request for August.,ham
+I shared the folder with you on Google Drive.,ham
+Reminder: submit your timesheet by end of day.,ham
+Great job on the presentation today!,ham
+"Congratulations! You won a free iPhone. Click now!",spam
+"FREE entry in our weekly prize draw, reply WIN now.",spam
+Limited offer: claim your cash reward today!,spam
+You have been selected as a lucky winner!,spam
+"Act fast and get free vouchers now!!!",spam
+Call this number to collect your prize.,spam
+Exclusive deal! Buy now and save big.,spam
+You won a gift card. Click here to claim.,spam
+Urgent promotion: free subscription available now.,spam
+Reply STOP to unsubscribe from this offer.,spam
+Earn $5000/week working from home. No experience needed!,spam
+Hot singles in your area want to meet you tonight.,spam
+You have been pre-approved for a credit line of $10000.,spam
+Last chance! 90% off designer watches today only.,spam
+Your number was chosen in our monthly lottery draw.,spam
+Get rich quick with this one weird trick doctors hate.,spam
+Double your income in 30 days. Call now for details.,spam
+Free trial of premium channels. Text YES to subscribe.,spam
+You qualify for a government grant. Apply immediately!,spam
+Amazing weight loss results guaranteed. Order now!,spam
+Cheap meds online no prescription required.,spam
+Make money fast by forwarding this to 10 friends.,spam
+Your loan application has been approved. Collect funds now.,spam
+Flash sale ends in one hour. Everything must go!,spam
+You are our 1000000th visitor. Claim your reward!,spam
+Win a luxury vacation. Enter your details to participate.,spam
+Exclusive members-only discount just for you.,spam
+Buy one get ten free. Limited stock available.,spam
+Congratulations on your cash prize of $2500!,spam
+Act now and receive a free smartphone upgrade.,spam
+Special promotion: zero interest for 12 months.,spam
+"Your account is suspended. Verify at https://account-check.example",phishing
+"Security alert: confirm your password immediately.",phishing
+"We detected unusual login activity. Click https://secure-login.example",phishing
+Your bank needs you to verify your account now.,phishing
+Update your payment details to avoid account closure.,phishing
+Microsoft support: call urgently to fix your computer.,phishing
+Reset your password at http://fake-reset.example immediately.,phishing
+Your mailbox quota is full. Login to keep receiving email.,phishing
+Verify your identity or your account will be locked.,phishing
+Invoice attached. Open link to review secure document.,phishing
+Your PayPal account has been limited. Sign in to restore access.,phishing
+Apple ID locked due to suspicious activity. Verify now at http://apple-id-verify.example,phishing
+Netflix payment failed. Update billing at https://netflix-billing.example,phishing
+Your Amazon order could not be delivered. Confirm address here.,phishing
+IRS notice: you owe back taxes. Pay immediately to avoid arrest.,phishing
+Your package is held at customs. Pay fee at http://delivery-fee.example,phishing
+WhatsApp verification code expired. Re-enter credentials at link.,phishing
+Your Google account will be deleted in 24 hours unless you verify.,phishing
+Chase Bank: unusual transaction detected. Confirm at secure portal.,phishing
+DocuSign: you have a pending document. Review and sign now.,phishing
+Your Microsoft 365 subscription expired. Renew to avoid data loss.,phishing
+LinkedIn: someone viewed your profile. Login to see who.,phishing
+Your crypto wallet requires immediate verification.,phishing
+FedEx: delivery attempt failed. Reschedule at http://fedex-track.example,phishing
+Your university email will be deactivated. Update password now.,phishing
+IT department: mandatory security update. Click to install patch.,phishing
+Your social security benefits are pending. Confirm identity online.,phishing
+Dropbox shared file expires today. Open link before deletion.,phishing
+Your Steam account has a pending trade. Authorize at login page.,phishing
+Bank transfer of $4500 pending. Approve transaction to release funds.,phishing
+Your insurance policy lapsed. Renew coverage at http://insure-renew.example,phishing
+Adobe Creative Cloud payment declined. Update card details.,phishing
+Your Zoom meeting recording is ready. Download from secure link.,phishing
+Coinbase: withdraw your funds before account suspension.,phishing
+Your tax refund is ready. Submit bank details to receive payment.,phishing
