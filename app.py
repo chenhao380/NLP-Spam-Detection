@@ -278,11 +278,25 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_hei
           AI-powered spam and phishing detection system that analyses emails and
           messages using NLP and Machine Learning.
         </p>
-        <a href="?start=1" target="_parent" class="hero-cta">Get Started →</a>
+        <a href="#" class="hero-cta" onclick="goToApp(); return false;">Get Started →</a>
       </div>
     </div>
 
     <script>
+      // Navigates the *top* Streamlit page (not this component iframe) to
+      // "?start=1". Built explicitly off window.parent.location rather than
+      // a plain relative href, since relative URLs inside a srcdoc iframe
+      // don't reliably resolve against the parent page.
+      function goToApp() {{
+        try {{
+          const parentLoc = window.parent.location;
+          const base = parentLoc.origin + parentLoc.pathname;
+          parentLoc.href = base + "?start=1";
+        }} catch (e) {{
+          window.location.href = "?start=1";
+        }}
+      }}
+
       (function() {{
         const target = {json.dumps(title)};
         const el = document.getElementById('glitchTitle');
