@@ -6,6 +6,8 @@ import plotly.express as px
 import streamlit as st
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from email import policy
+from email.parser import BytesParser
 
 from config import DATASET_PATH, METRICS_PATH
 from predict import SpamDetector
@@ -122,39 +124,137 @@ def home() -> None:
 
 def analyze() -> None:
     st.title("Analyze Message")
+
     sample = "URGENT! Verify your account now at https://secure-check.example or it will be suspended!!"
-    message = st.text_area("Paste a text message or email", value=st.session_state.get("message", ""), height=170, placeholder=sample)
-    if st.button("Analyze message", type="primary", use_container_width=True):
+
+    # Upload file
+    uploaded_file = st.file_uploader(
+        "Or drag and drop an email or text file",
+        type=["txt", "eml"]
+    )
+
+    uploaded_message = ""
+
+    if uploaded_file is not None:
         try:
-            with st.spinner("Checking language patterns and risk indicators…"):
+            if uploaded_file.name.lower().endswith(".eml"):
+                email_message = BytesParser(
+                    policy=policy.default
+                ).parse(uploaded_file)
+
+                if email_message.is_multipart():
+                    body = email_message.get_body(preferencelist=("plain",))
+                    uploaded_message = body.get_content() if body else ""
+                else:
+                    uploaded_message = email_message.get_content()
+
+            else:
+                uploaded_message = uploaded_file.read().decode(
+                    "utf-8",
+                    errors="ignore"
+                )
+
+        except Exception as e:
+            st.error(f"Unable to read file: {e}")
+            return
+
+    # Text area
+    message = st.text_area(
+        "Paste a text message or email",
+        value=uploaded_message or st.session_state.get("message", ""),
+        height=170,
+        placeholder=sample
+    )
+
+    if st.button("Analyze Message", type="primary", use_container_width=True):
+        try:
+            with st.spinner("Checking language patterns and risk indicators..."):
                 result = detector().analyze(message)
-            append_history(message, result["prediction"], result["confidence"], result["risk_score"])
-            st.session_state.result, st.session_state.message = result, message
+
+            append_history(
+                message,
+                result["prediction"],
+                result["confidence"],
+                result["risk_score"]
+            )
+
+            st.session_state.result = result
+            st.session_state.message = message
+
         except (FileNotFoundError, ValueError) as error:
-            st.error(str(error)); return
+            st.error(str(error))
+            return
+
     result = st.session_state.get("result")
+
     if not result:
         return
-    color = {"ham": "✅", "spam": "⚠️", "phishing": "🚨"}[result["prediction"]]
+
+    color = {
+        "ham": "✅",
+        "spam": "⚠️",
+        "phishing": "🚨"
+    }[result["prediction"]]
+
     st.subheader(f"{color} {result['prediction'].title()}")
+
     a, b, c = st.columns(3)
+
     a.metric("Confidence", f"{result['confidence']:.1%}")
-    b.metric("Risk score", f"{result['risk_score']}/100")
-    c.metric("Risk level", result["risk_level"])
+    b.metric("Risk Score", f"{result['risk_score']}/100")
+    c.metric("Risk Level", result["risk_level"])
+
     st.progress(result["risk_score"] / 100)
+
     st.write(result["explanation"])
-    words = [word.upper() for values in result["indicators"]["keywords"].values() for word in values]
-    st.caption("Detected keywords: " + (", ".join(words) if words else "None"))
+
+    words = [
+        word.upper()
+        for values in result["indicators"]["keywords"].values()
+        for word in values
+    ]
+
+    st.caption(
+        "Detected Keywords: " +
+        (", ".join(words) if words else "None")
+    )
+
     st.code(
-        f"Prediction: {result['prediction'].title()}\nConfidence: {result['confidence']:.1%}\n"
-        f"Risk: {result['risk_score']}/100 ({result['risk_level']})\n{result['explanation']}",
+        f"Prediction: {result['prediction'].title()}\n"
+        f"Confidence: {result['confidence']:.1%}\n"
+        f"Risk: {result['risk_score']}/100 ({result['risk_level']})\n"
+        f"{result['explanation']}",
         language=None,
     )
+
     if result["indicators"]["urls"]:
-        st.warning("Suspicious URL detected: " + ", ".join(result["indicators"]["urls"]))
-    chart = pd.DataFrame({"Class": list(result["probabilities"]), "Probability": list(result["probabilities"].values())})
-    st.plotly_chart(px.bar(chart, x="Class", y="Probability", range_y=[0, 1], color="Class"), use_container_width=True)
-    st.download_button("Download result as PDF", result_pdf(st.session_state.message, result), "message-analysis.pdf", "application/pdf")
+        st.warning(
+            "Suspicious URL detected: " +
+            ", ".join(result["indicators"]["urls"])
+        )
+
+    chart = pd.DataFrame({
+        "Class": list(result["probabilities"]),
+        "Probability": list(result["probabilities"].values())
+    })
+
+    st.plotly_chart(
+        px.bar(
+            chart,
+            x="Class",
+            y="Probability",
+            range_y=[0, 1],
+            color="Class"
+        ),
+        use_container_width=True
+    )
+
+    st.download_button(
+        "Download Result as PDF",
+        result_pdf(st.session_state.message, result),
+        "message-analysis.pdf",
+        "application/pdf"
+    )
 
 def dashboard() -> None:
     st.title("Statistics Dashboard")
