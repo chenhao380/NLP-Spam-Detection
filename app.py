@@ -103,8 +103,10 @@ GLOBAL_CSS = """
 # Hero section: dark cybersecurity background + mouse-triggered glitch title
 # Rendered as a self-contained HTML component (own CSS + JS, no Streamlit
 # rerun involved) so the scramble animation is instant and client-side only.
+# The hero now fills the entire viewport (full-bleed, edge-to-edge, no
+# rounded corners) instead of sitting in a small centered card.
 # ---------------------------------------------------------------------------
-def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
+def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_height: int = 900) -> None:
     # Theme tokens: plain white surface in light mode, plain black in dark
     # mode (no gradient wash) so the toggle reads clearly as two states.
     if dark:
@@ -130,11 +132,17 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
     <div class="hero-wrap">
       <style>
         * {{ box-sizing: border-box; }}
+        html, body {{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }}
         .hero-wrap {{
             position: relative;
             width: 100%;
-            min-height: 430px;
-            border-radius: 14px;
+            height: 100vh;
+            min-height: 100%;
+            border-radius: 0;
             overflow: hidden;
             background: {bg};
             display: flex;
@@ -159,9 +167,10 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
             mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 75%);
         }}
 
-        /* background "garbled code" layer: a grid of faint monospace
-           glyphs, a handful of which flicker to a random character (and
-           to the accent colour) every tick, like static behind the title */
+        /* background "garbled code" layer: a grid of monospace glyphs.
+           They idle on "/" and only scramble to other characters where
+           the cursor has passed, like a glitch trail, then settle back
+           down to "/" again once left alone. */
         .hero-glyphs {{
             position: absolute;
             inset: 0;
@@ -219,7 +228,6 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
         }}
 
         @media (max-width: 640px) {{
-            .hero-wrap {{ min-height: 380px; border-radius: 10px; }}
             .hero-inner {{ padding: 1.75rem 1rem; }}
         }}
       </style>
@@ -302,14 +310,17 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
         el.addEventListener('mouseleave', resetTitle);
 
         // ---- background glyph noise, reacts only to the cursor ----
-        // The grid sits still and quiet until the mouse passes over the
-        // hero; cells near the pointer scramble to a new (briefly
-        // accent-coloured) character, so the "garbled code" only moves
-        // where you've actually hovered, like a glitch trail.
+        // Every cell idles on "/". Moving the mouse over the hero makes
+        // nearby cells flicker through random characters (a glitch
+        // trail); each touched cell keeps flickering on its own for a
+        // little while afterwards, gradually slowing down, before
+        // settling back to "/" again — even if the mouse has already
+        // moved on or left.
         (function() {{
             const wrap = document.querySelector('.hero-wrap');
             const layer = document.getElementById('heroGlyphs');
             const cell = 22; // px per glyph cell
+            const idleChar = "/";
             const noiseChars = "01AXF$#%&*<>/\\\\{{}}[]=+;:";
             let cols = 0, rows = 0;
 
@@ -322,10 +333,38 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
                 const total = cols * rows;
                 for (let i = 0; i < total; i++) {{
                     const span = document.createElement('span');
-                    span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
+                    span.textContent = idleChar;
                     span.style.textAlign = 'center';
                     layer.appendChild(span);
                 }}
+            }}
+
+            // Kicks off (or restarts) a decaying flicker on a single glyph
+            // cell: it rapidly cycles through random characters, gradually
+            // slowing down, then locks back to the idle "/" character.
+            function triggerGlyph(span) {{
+                if (span._glyphTimer) {{
+                    clearTimeout(span._glyphTimer);
+                }}
+                const start = performance.now();
+                const duration = 900 + Math.random() * 700; // total settle time
+
+                (function step() {{
+                    const elapsed = performance.now() - start;
+                    if (elapsed > duration) {{
+                        span.textContent = idleChar;
+                        span.classList.remove('flash');
+                        span._glyphTimer = null;
+                        return;
+                    }}
+                    span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
+                    span.classList.add('flash');
+                    setTimeout(() => span.classList.remove('flash'), 80);
+
+                    const progress = elapsed / duration;
+                    const nextDelay = 35 + progress * 150; // flicker slows as it settles
+                    span._glyphTimer = setTimeout(step, nextDelay);
+                }})();
             }}
 
             buildGrid();
@@ -350,9 +389,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
                         if (Math.random() > 0.5) continue; // keep the trail sparse
                         const span = layer.children[rr * cols + cc];
                         if (!span) continue;
-                        span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
-                        span.classList.add('flash');
-                        setTimeout(((s) => () => s.classList.remove('flash'))(span), 90);
+                        triggerGlyph(span);
                     }}
                 }}
             }});
@@ -360,7 +397,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
       }})();
     </script>
     """
-    components.html(html, height=470, scrolling=False)
+    components.html(html, height=component_height, scrolling=False)
 
 
 def apply_theme() -> None:
@@ -446,57 +483,35 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
+    # Full-bleed home page: strip the block-container's padding/max-width
+    # just for this render so the hero can fill the entire browser viewport
+    # edge-to-edge instead of sitting inside a small centered card.
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            max-width: 100% !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     render_hero("EMAIL DETECTION", dark=True)
 
+    st.markdown(
+        '<div style="max-width:1000px; margin:0 auto; padding:1.5rem 1rem 3rem;">',
+        unsafe_allow_html=True,
+    )
     _, mid, _ = st.columns([1, 1, 1])
     with mid:
         if st.button("Get Started", type="primary", use_container_width=True):
             st.session_state.started = True
             go_to("Analyze Message")
-
-    st.markdown('<div class="cf-fade">', unsafe_allow_html=True)
-    st.divider()
-
-    st.markdown("## System Overview")
-
-    cols = st.columns(3)
-    cols[0].metric("Detection Classes", "Safe · Spam · Phishing")
-    cols[1].metric("Best AI Model", metrics().get("best_model", "Train model"))
-    cols[2].metric("Training Dataset", metrics().get("dataset_rows", "—"))
-
-    st.divider()
-
-    st.markdown("## Navigation Guide")
-
-    st.markdown(
-        """
-    **Home** — Learn about the purpose of Message Guard and view system information.
-
-    **Analyze Message** — Paste an email or text message to detect whether it is
-    Safe, Spam, or Phishing. Shows prediction, confidence, risk score, explanation,
-    suspicious keywords/URLs, and a downloadable PDF report.
-
-    **Dashboard** — Dataset class distribution, model comparison, daily analysis
-    activity, and risk score distribution.
-
-    **History** — View, search, export, or delete previous prediction records.
-
-    **About** — Technologies used, machine learning models, and project purpose.
-    """
-    )
-
-    st.divider()
-
-    st.markdown("## How Message Guard Works")
-    st.markdown(
-        """
-    1. Paste a message or email into **Analyze Message**.
-    2. The system preprocesses the text using NLP techniques.
-    3. The trained machine learning model analyses the message.
-    4. A prediction, confidence score, risk score, and explanation are generated.
-    5. The analysis is saved to the local prediction history.
-    """
-    )
     st.markdown('</div>', unsafe_allow_html=True)
 
 
@@ -665,7 +680,52 @@ def history_page() -> None:
 
 
 def about() -> None:
+    # All of the informational content that used to live below the hero on
+    # the Home page now lives here, shown once the user has clicked
+    # "Get Started" and reached the About tab.
     st.title("About")
+
+    st.markdown("## System Overview")
+    cols = st.columns(3)
+    cols[0].metric("Detection Classes", "Safe · Spam · Phishing")
+    cols[1].metric("Best AI Model", metrics().get("best_model", "Train model"))
+    cols[2].metric("Training Dataset", metrics().get("dataset_rows", "—"))
+
+    st.divider()
+
+    st.markdown("## Navigation Guide")
+    st.markdown(
+        """
+    **Home** — Learn about the purpose of Message Guard and view system information.
+
+    **Analyze Message** — Paste an email or text message to detect whether it is
+    Safe, Spam, or Phishing. Shows prediction, confidence, risk score, explanation,
+    suspicious keywords/URLs, and a downloadable PDF report.
+
+    **Dashboard** — Dataset class distribution, model comparison, daily analysis
+    activity, and risk score distribution.
+
+    **History** — View, search, export, or delete previous prediction records.
+
+    **About** — Technologies used, machine learning models, and project purpose.
+    """
+    )
+
+    st.divider()
+
+    st.markdown("## How Message Guard Works")
+    st.markdown(
+        """
+    1. Paste a message or email into **Analyze Message**.
+    2. The system preprocesses the text using NLP techniques.
+    3. The trained machine learning model analyses the message.
+    4. A prediction, confidence score, risk score, and explanation are generated.
+    5. The analysis is saved to the local prediction history.
+    """
+    )
+
+    st.divider()
+
     st.write("This educational project compares Multinomial Naive Bayes, Logistic Regression, and SVM on TF-IDF features. The best weighted-F1 model is saved locally.")
     st.warning("Predictions are decision support, not a replacement for security controls. Do not open unexpected links or disclose credentials.")
 
