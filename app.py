@@ -102,7 +102,7 @@ GLOBAL_CSS = """
 # Rendered as a self-contained HTML component (own CSS + JS, no Streamlit
 # rerun involved) so the scramble animation is instant and client-side only.
 # ---------------------------------------------------------------------------
-def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
+def render_hero(title: str = "EMAIL DETECTION", dark: bool = True) -> None:
     # Theme tokens: plain white surface in light mode, plain black in dark
     # mode (no gradient wash) so the toggle reads clearly as two states.
     if dark:
@@ -131,7 +131,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
         .hero-wrap {{
             position: relative;
             width: 100%;
-            min-height: 380px;
+            min-height: 620px;
             border-radius: 14px;
             overflow: hidden;
             background: {bg};
@@ -213,7 +213,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
         }}
 
         @media (max-width: 640px) {{
-            .hero-wrap {{ min-height: 320px; border-radius: 10px; }}
+            .hero-wrap {{ min-height: 520px; border-radius: 10px; }}
             .hero-inner {{ padding: 1.75rem 1rem; }}
         }}
       </style>
@@ -295,16 +295,21 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
         el.addEventListener('mouseenter', playScramble);
         el.addEventListener('mouseleave', resetTitle);
 
-        // ---- background glyph noise ("garbled code" backdrop) ----
+        // ---- background glyph noise, reacts only to the cursor ----
+        // The grid sits still and quiet until the mouse passes over the
+        // hero; cells near the pointer scramble to a new (briefly
+        // accent-coloured) character, so the "garbled code" only moves
+        // where you've actually hovered, like a glitch trail.
         (function() {{
             const wrap = document.querySelector('.hero-wrap');
             const layer = document.getElementById('heroGlyphs');
             const cell = 22; // px per glyph cell
             const noiseChars = "01AXF$#%&*<>/\\\\{{}}[]=+;:";
+            let cols = 0, rows = 0;
 
             function buildGrid() {{
-                const cols = Math.ceil(wrap.clientWidth / cell);
-                const rows = Math.ceil(wrap.clientHeight / cell);
+                cols = Math.ceil(wrap.clientWidth / cell);
+                rows = Math.ceil(wrap.clientHeight / cell);
                 layer.style.gridTemplateColumns = `repeat(${{cols}}, ${{cell}}px)`;
                 layer.style.gridTemplateRows = `repeat(${{rows}}, ${{cell}}px)`;
                 layer.innerHTML = "";
@@ -320,38 +325,86 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = False) -> None:
             buildGrid();
             window.addEventListener('resize', buildGrid);
 
-            // periodically flicker a handful of cells to a new (and briefly
-            // accent-coloured) character, then let them settle back down
-            setInterval(function() {{
-                const spans = layer.children;
-                if (!spans.length) return;
-                const hits = 6 + Math.floor(Math.random() * 8);
-                for (let n = 0; n < hits; n++) {{
-                    const idx = Math.floor(Math.random() * spans.length);
-                    const span = spans[idx];
-                    span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
-                    span.classList.add('flash');
-                    setTimeout(((s) => () => s.classList.remove('flash'))(span), 220);
+            let lastMove = 0;
+            wrap.addEventListener('mousemove', function(e) {{
+                const now = performance.now();
+                if (now - lastMove < 35) return; // light throttle
+                lastMove = now;
+
+                const rect = wrap.getBoundingClientRect();
+                const col = Math.floor((e.clientX - rect.left) / cell);
+                const row = Math.floor((e.clientY - rect.top) / cell);
+                const radius = 2;
+
+                for (let dr = -radius; dr <= radius; dr++) {{
+                    for (let dc = -radius; dc <= radius; dc++) {{
+                        const rr = row + dr, cc = col + dc;
+                        if (rr < 0 || rr >= rows || cc < 0 || cc >= cols) continue;
+                        if (Math.sqrt(dr * dr + dc * dc) > radius) continue;
+                        if (Math.random() > 0.5) continue; // keep the trail sparse
+                        const span = layer.children[rr * cols + cc];
+                        if (!span) continue;
+                        span.textContent = noiseChars[Math.floor(Math.random() * noiseChars.length)];
+                        span.classList.add('flash');
+                        setTimeout(((s) => () => s.classList.remove('flash'))(span), 260);
+                    }}
                 }}
-            }}, 160);
+            }});
         }})();
       }})();
     </script>
     """
-    components.html(html, height=420, scrolling=False)
+    components.html(html, height=660, scrolling=False)
 
 
-def apply_theme() -> bool:
+def apply_theme() -> None:
     st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
-    dark = st.sidebar.toggle("Dark mode", value=False)
-    st.session_state.dark_mode = dark
-    if dark:
-        st.markdown(
-            "<style>.stApp {background:#101827;color:#e5e7eb}"
-            "div[data-testid='stMetric'] {background:#1f2937;border-color:#2d3748}</style>",
-            unsafe_allow_html=True,
-        )
-    return dark
+    st.session_state.dark_mode = True
+    st.markdown(
+        """
+        <style>
+        .stApp { background: #0b0d12; color: #e5e7eb; }
+        div[data-testid='stMetric'] { background:#171a21; border-color:#2a2e38; }
+
+        /* ---- sidebar shell ---- */
+        section[data-testid="stSidebar"] {
+            background: #05070c;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        section[data-testid="stSidebar"] .block-container { padding-top: 1.4rem; }
+        section[data-testid="stSidebar"] hr { border-top: 1px solid rgba(255,255,255,0.08); }
+
+        /* ---- nav radio list (shown after "Get Started") ---- */
+        section[data-testid="stSidebar"] div[role="radiogroup"] {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] label {
+            padding: 0.6rem 0.85rem;
+            border-radius: 9px;
+            border: 1px solid transparent;
+            color: #aab3c2;
+            transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+            background: rgba(246, 130, 31, 0.10);
+            border-color: rgba(246, 130, 31, 0.25);
+            color: #f5f7fa;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"],
+        section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+            background: rgba(246, 130, 31, 0.16);
+            border-color: rgba(246, 130, 31, 0.4);
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) div {
+            color: #ffb066;
+            font-weight: 700;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 @st.cache_resource
@@ -387,7 +440,7 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
-    render_hero("EMAIL DETECTION", dark=st.session_state.get("dark_mode", False))
+    render_hero("EMAIL DETECTION", dark=True)
 
     _, mid, _ = st.columns([1, 1, 1])
     with mid:
@@ -621,16 +674,31 @@ pages = {
     "About": about,
 }
 
+NAV_ICONS = {
+    "Home": "🏠",
+    "Analyze Message": "🔍",
+    "Dashboard": "📊",
+    "History": "🕘",
+    "About": "ℹ️",
+}
+
 if st.session_state.started:
     # Full navigation unlocked after "Get Started"
     current_index = PAGES.index(st.session_state.nav_page) if st.session_state.nav_page in PAGES else 0
-    selected = st.sidebar.radio("Navigate", PAGES, index=current_index)
+    st.sidebar.markdown("#### Navigate")
+    selected = st.sidebar.radio(
+        "Navigate",
+        PAGES,
+        index=current_index,
+        format_func=lambda p: f"{NAV_ICONS.get(p, '')}  {p}",
+        label_visibility="collapsed",
+    )
     if selected != st.session_state.nav_page:
         st.session_state.nav_page = selected
 else:
     # Locked state: plain static text (no disabled widget, avoids hover glitches)
-    st.sidebar.markdown("**Navigate**")
-    st.sidebar.markdown("Home")
+    st.sidebar.markdown("#### Navigate")
+    st.sidebar.markdown("🏠  Home")
     st.sidebar.caption("Click Get Started on the Home page to unlock the other sections.")
     st.session_state.nav_page = "Home"
 
