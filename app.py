@@ -4,6 +4,7 @@ from io import BytesIO
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import streamlit.components.v1 as components
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from email import policy
@@ -28,11 +29,10 @@ if "nav_page" not in st.session_state:
 
 
 # ---------------------------------------------------------------------------
-# Cloudflare-inspired look & feel
+# Global styling (applies outside the hero iframe: buttons, cards, layout)
 # ---------------------------------------------------------------------------
-CLOUDFLARE_CSS = """
+GLOBAL_CSS = """
 <style>
-    /* ---- global type & spacing, Cloudflare learning-center feel ---- */
     html, body, [class*="css"]  {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -41,85 +41,235 @@ CLOUDFLARE_CSS = """
         background-color: #ffffff;
     }
 
-    /* tone down Streamlit's default header spacing */
     .block-container {
-        padding-top: 2.5rem;
+        padding-top: 1.5rem;
         padding-bottom: 3rem;
         max-width: 1000px;
     }
 
-    /* section dividers, subtle like cloudflare's hairlines */
     hr {
         border: none;
         border-top: 1px solid #e5e7eb;
         margin: 2rem 0;
     }
 
-    /* Cloudflare orange for primary buttons */
-    .stButton > button[kind="primary"] {
-        background-color: #f6821f;
-        border: none;
-        border-radius: 4px;
-        color: #ffffff;
-        font-weight: 600;
-        padding: 0.65rem 1.4rem;
+    /* fade-in-up animation applied to page sections as they render */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
-    .stButton > button[kind="primary"]:hover {
-        background-color: #d96f11;
-        color: #ffffff;
+    .cf-fade {
+        animation: fadeInUp 0.6s ease-out both;
     }
 
-    /* card look for metrics / info blocks */
+    /* Get Started / primary buttons: prominent, animated on hover */
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #f6821f, #ff9d3d);
+        border: none;
+        border-radius: 6px;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 0.75rem 1.6rem;
+        box-shadow: 0 4px 14px rgba(246, 130, 31, 0.35);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .stButton > button[kind="primary"]:hover {
+        transform: translateY(-2px) scale(1.015);
+        box-shadow: 0 8px 22px rgba(246, 130, 31, 0.45);
+        background: linear-gradient(135deg, #e0740f, #f6821f);
+        color: #ffffff;
+    }
+    .stButton > button[kind="primary"]:active {
+        transform: translateY(0px) scale(0.99);
+    }
+
     div[data-testid="stMetric"] {
         background: #fafafa;
         border: 1px solid #ececec;
         border-radius: 8px;
         padding: 0.9rem 1rem;
+        transition: box-shadow 0.2s ease;
     }
-
-    /* --- hero block for the Home / landing page --- */
-    .cf-hero {
-        text-align: center;
-        padding: 3.5rem 1rem 2.5rem 1rem;
-    }
-    .cf-hero .cf-icon {
-        font-size: 3.2rem;
-        line-height: 1;
-        margin-bottom: 0.75rem;
-    }
-    .cf-hero h1 {
-        font-size: 2.1rem;
-        font-weight: 700;
-        color: #14181f;
-        margin-bottom: 0.4rem;
-    }
-    .cf-hero p.cf-sub {
-        font-size: 1.05rem;
-        color: #4b5563;
-        max-width: 560px;
-        margin: 0 auto 0.25rem auto;
-        line-height: 1.55;
-    }
-
-    .cf-card {
-        border: 1px solid #ececec;
-        border-radius: 8px;
-        padding: 1.4rem 1.6rem;
-        background: #fcfcfc;
-        margin-bottom: 1rem;
+    div[data-testid="stMetric"]:hover {
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
 </style>
 """
 
+# ---------------------------------------------------------------------------
+# Hero section: dark cybersecurity background + mouse-triggered glitch title
+# Rendered as a self-contained HTML component (own CSS + JS, no Streamlit
+# rerun involved) so the scramble animation is instant and client-side only.
+# ---------------------------------------------------------------------------
+def render_hero(title: str = "EMAIL DETECTION") -> None:
+    html = f"""
+    <div class="hero-wrap">
+      <style>
+        * {{ box-sizing: border-box; }}
+        .hero-wrap {{
+            position: relative;
+            width: 100%;
+            min-height: 380px;
+            border-radius: 14px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 30%, rgba(246, 130, 31, 0.10), transparent 40%),
+                linear-gradient(160deg, #0b0f1a 0%, #10182b 55%, #0b0f1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            animation: heroFadeIn 0.8s ease-out both;
+        }}
+        @keyframes heroFadeIn {{
+            from {{ opacity: 0; transform: translateY(10px); }}
+            to   {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        /* faint circuit / grid overlay for the cybersecurity feel */
+        .hero-grid {{
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(148, 197, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 197, 255, 0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 75%);
+        }}
+
+        .hero-inner {{
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2.5rem 1.25rem;
+            max-width: 720px;
+        }}
+
+        .hero-icon {{
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45));
+        }}
+
+        .glitch-title {{
+            font-size: clamp(2.1rem, 6vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #f5f7fa;
+            margin: 0 0 0.9rem 0;
+            cursor: default;
+            text-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+            user-select: none;
+        }}
+        .glitch-title span.char {{
+            display: inline-block;
+            min-width: 0.15em;
+        }}
+
+        .hero-sub {{
+            font-size: clamp(0.92rem, 2vw, 1.05rem);
+            color: #aab3c2;
+            line-height: 1.6;
+            margin: 0 auto;
+        }}
+
+        @media (max-width: 640px) {{
+            .hero-wrap {{ min-height: 320px; border-radius: 10px; }}
+            .hero-inner {{ padding: 1.75rem 1rem; }}
+        }}
+      </style>
+
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <div class="hero-icon">🛡️</div>
+        <h1 class="glitch-title" id="glitchTitle"></h1>
+        <p class="hero-sub">
+          AI-powered spam and phishing detection system that analyses emails and
+          messages using NLP and Machine Learning.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      (function() {{
+        const target = {json.dumps(title)};
+        const el = document.getElementById('glitchTitle');
+        const glitchChars = "!<>-_\\\\/[]{{}}—=+*^?#$%&0123456789";
+        let frame = null;
+        let running = false;
+
+        function buildSpans(text) {{
+            el.innerHTML = "";
+            for (const ch of text) {{
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = ch === ' ' ? '\\u00A0' : ch;
+                el.appendChild(span);
+            }}
+        }}
+
+        function randomChar() {{
+            return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        }}
+
+        function playScramble() {{
+            if (running) return;
+            running = true;
+            const spans = Array.from(el.querySelectorAll('.char'));
+            const total = spans.length;
+            const revealDelayPerChar = 55; // ms between each letter locking in
+            const scrambleTickMs = 40;
+            let startTime = performance.now();
+
+            function tick(now) {{
+                const elapsed = now - startTime;
+                const revealCount = Math.min(total, Math.floor(elapsed / revealDelayPerChar));
+
+                for (let i = 0; i < total; i++) {{
+                    const original = target[i] === ' ' ? '\\u00A0' : target[i];
+                    if (i < revealCount) {{
+                        spans[i].textContent = original;
+                    }} else if (original === '\\u00A0') {{
+                        spans[i].textContent = original;
+                    }} else {{
+                        spans[i].textContent = randomChar();
+                    }}
+                }}
+
+                if (revealCount < total) {{
+                    frame = requestAnimationFrame(tick);
+                }} else {{
+                    running = false;
+                }}
+            }}
+
+            frame = requestAnimationFrame(tick);
+        }}
+
+        function resetTitle() {{
+            if (frame) cancelAnimationFrame(frame);
+            running = false;
+            buildSpans(target);
+        }}
+
+        buildSpans(target);
+        el.addEventListener('mouseenter', playScramble);
+        el.addEventListener('mouseleave', resetTitle);
+      }})();
+    </script>
+    """
+    components.html(html, height=420, scrolling=False)
+
 
 def apply_theme() -> None:
-    st.markdown(CLOUDFLARE_CSS, unsafe_allow_html=True)
+    st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
     dark = st.sidebar.toggle("Dark mode", value=False)
     if dark:
         st.markdown(
             "<style>.stApp {background:#101827;color:#e5e7eb}"
-            ".stMetric, div[data-testid='stMetric'], .cf-card {background:#1f2937;border-color:#2d3748}"
-            ".cf-hero h1 {color:#f3f4f6}.cf-hero p.cf-sub{color:#cbd5e1}</style>",
+            "div[data-testid='stMetric'] {background:#1f2937;border-color:#2d3748}</style>",
             unsafe_allow_html=True,
         )
 
@@ -157,21 +307,7 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
-    # --- hero section, Cloudflare-style: big icon + big title + short line ---
-    st.markdown(
-        """
-        <div class="cf-hero">
-            <div class="cf-icon">🛡️</div>
-            <h1>Email Detection</h1>
-            <p class="cf-sub">
-                Message Guard uses AI to tell you whether a message or email is
-                <strong>Safe</strong>, <strong>Spam</strong>, or <strong>Phishing</strong> —
-                instantly, with a clear explanation for every result.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    render_hero("EMAIL DETECTION")
 
     _, mid, _ = st.columns([1, 1, 1])
     with mid:
@@ -179,6 +315,7 @@ def home() -> None:
             st.session_state.started = True
             go_to("Analyze Message")
 
+    st.markdown('<div class="cf-fade">', unsafe_allow_html=True)
     st.divider()
 
     st.markdown("## System Overview")
@@ -221,6 +358,7 @@ def home() -> None:
     5. The analysis is saved to the local prediction history.
     """
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 def analyze() -> None:
@@ -410,8 +548,7 @@ if st.session_state.started:
     if selected != st.session_state.nav_page:
         st.session_state.nav_page = selected
 else:
-    # Locked state: no interactive/disabled widget (avoids the hover glitch),
-    # just a plain caption explaining how to unlock the rest of the app.
+    # Locked state: plain static text (no disabled widget, avoids hover glitches)
     st.sidebar.markdown("**Navigate**")
     st.sidebar.markdown("Home")
     st.sidebar.caption("Click Get Started on the Home page to unlock the other sections.")
