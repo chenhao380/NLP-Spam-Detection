@@ -16,17 +16,112 @@ from utils.helpers import append_history, clear_history, load_history
 
 st.set_page_config(page_title="Message Guard", page_icon="🛡️", layout="wide")
 
+PAGES = ["Home", "Analyze Message", "Dashboard", "History", "About"]
+
 # ---------------------------------------------------------------------------
 # Session state defaults
 # ---------------------------------------------------------------------------
 if "started" not in st.session_state:
     st.session_state.started = False
+if "nav_page" not in st.session_state:
+    st.session_state.nav_page = "Home"
+
+
+# ---------------------------------------------------------------------------
+# Cloudflare-inspired look & feel
+# ---------------------------------------------------------------------------
+CLOUDFLARE_CSS = """
+<style>
+    /* ---- global type & spacing, Cloudflare learning-center feel ---- */
+    html, body, [class*="css"]  {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .stApp {
+        background-color: #ffffff;
+    }
+
+    /* tone down Streamlit's default header spacing */
+    .block-container {
+        padding-top: 2.5rem;
+        padding-bottom: 3rem;
+        max-width: 1000px;
+    }
+
+    /* section dividers, subtle like cloudflare's hairlines */
+    hr {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin: 2rem 0;
+    }
+
+    /* Cloudflare orange for primary buttons */
+    .stButton > button[kind="primary"] {
+        background-color: #f6821f;
+        border: none;
+        border-radius: 4px;
+        color: #ffffff;
+        font-weight: 600;
+        padding: 0.65rem 1.4rem;
+    }
+    .stButton > button[kind="primary"]:hover {
+        background-color: #d96f11;
+        color: #ffffff;
+    }
+
+    /* card look for metrics / info blocks */
+    div[data-testid="stMetric"] {
+        background: #fafafa;
+        border: 1px solid #ececec;
+        border-radius: 8px;
+        padding: 0.9rem 1rem;
+    }
+
+    /* --- hero block for the Home / landing page --- */
+    .cf-hero {
+        text-align: center;
+        padding: 3.5rem 1rem 2.5rem 1rem;
+    }
+    .cf-hero .cf-icon {
+        font-size: 3.2rem;
+        line-height: 1;
+        margin-bottom: 0.75rem;
+    }
+    .cf-hero h1 {
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: #14181f;
+        margin-bottom: 0.4rem;
+    }
+    .cf-hero p.cf-sub {
+        font-size: 1.05rem;
+        color: #4b5563;
+        max-width: 560px;
+        margin: 0 auto 0.25rem auto;
+        line-height: 1.55;
+    }
+
+    .cf-card {
+        border: 1px solid #ececec;
+        border-radius: 8px;
+        padding: 1.4rem 1.6rem;
+        background: #fcfcfc;
+        margin-bottom: 1rem;
+    }
+</style>
+"""
 
 
 def apply_theme() -> None:
+    st.markdown(CLOUDFLARE_CSS, unsafe_allow_html=True)
     dark = st.sidebar.toggle("Dark mode", value=False)
     if dark:
-        st.markdown("<style>.stApp {background:#101827;color:#e5e7eb}.stMetric {background:#1f2937}</style>", unsafe_allow_html=True)
+        st.markdown(
+            "<style>.stApp {background:#101827;color:#e5e7eb}"
+            ".stMetric, div[data-testid='stMetric'], .cf-card {background:#1f2937;border-color:#2d3748}"
+            ".cf-hero h1 {color:#f3f4f6}.cf-hero p.cf-sub{color:#cbd5e1}</style>",
+            unsafe_allow_html=True,
+        )
 
 
 @st.cache_resource
@@ -55,90 +150,77 @@ def result_pdf(message: str, result: dict) -> bytes:
     pdf.drawText(text); pdf.save(); return buffer.getvalue()
 
 
+def go_to(page_name: str) -> None:
+    """Central helper: change page + rerun (avoids duplicated rerun logic)."""
+    st.session_state.nav_page = page_name
+    st.rerun()
+
+
 def home() -> None:
-    st.title("🛡️ Welcome to Message Guard")
-    st.subheader("AI-Powered Spam and Phishing Detection System")
+    # --- hero section, Cloudflare-style: big icon + big title + short line ---
+    st.markdown(
+        """
+        <div class="cf-hero">
+            <div class="cf-icon">🛡️</div>
+            <h1>Email Detection</h1>
+            <p class="cf-sub">
+                Message Guard uses AI to tell you whether a message or email is
+                <strong>Safe</strong>, <strong>Spam</strong>, or <strong>Phishing</strong> —
+                instantly, with a clear explanation for every result.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    st.write("""
-    Welcome to **Message Guard**, an AI-powered web application designed to help users identify whether a message or email is **Safe**, **Spam**, or **Phishing**.
-
-    The system uses **Natural Language Processing (NLP)** and **Machine Learning** to analyse messages and provide a prediction, confidence score, risk level, and explanation.
-    """)
-
-    if not st.session_state.started:
-        st.info("👉 Click **Get Started** below to unlock the navigation menu and access the full application.")
-        if st.button("🚀 Get Started", type="primary", use_container_width=True):
+    _, mid, _ = st.columns([1, 1, 1])
+    with mid:
+        if st.button("Get Started", type="primary", use_container_width=True):
             st.session_state.started = True
-            st.rerun()
-    else:
-        st.success("✅ You're all set! Use the navigation menu on the left to explore the system features.")
+            go_to("Analyze Message")
 
     st.divider()
 
-    st.markdown("## 📌 System Overview")
+    st.markdown("## System Overview")
 
     cols = st.columns(3)
+    cols[0].metric("Detection Classes", "Safe · Spam · Phishing")
+    cols[1].metric("Best AI Model", metrics().get("best_model", "Train model"))
+    cols[2].metric("Training Dataset", metrics().get("dataset_rows", "—"))
 
-    cols[0].metric(
-        "Detection Classes",
-        "Safe · Spam · Phishing"
-    )
+    st.divider()
 
-    cols[1].metric(
-        "Best AI Model",
-        metrics().get("best_model", "Train model")
-    )
+    st.markdown("## Navigation Guide")
 
-    cols[2].metric(
-        "Training Dataset",
-        metrics().get("dataset_rows", "—")
+    st.markdown(
+        """
+    **Home** — Learn about the purpose of Message Guard and view system information.
+
+    **Analyze Message** — Paste an email or text message to detect whether it is
+    Safe, Spam, or Phishing. Shows prediction, confidence, risk score, explanation,
+    suspicious keywords/URLs, and a downloadable PDF report.
+
+    **Dashboard** — Dataset class distribution, model comparison, daily analysis
+    activity, and risk score distribution.
+
+    **History** — View, search, export, or delete previous prediction records.
+
+    **About** — Technologies used, machine learning models, and project purpose.
+    """
     )
 
     st.divider()
 
-    st.markdown("## 📂 Navigation Guide")
-
-    st.markdown("""
-    ### 🏠 Home
-    Learn about the purpose of Message Guard and view system information.
-
-    ### 🔍 Analyze Message
-    Paste an email or text message to detect whether it is **Safe**, **Spam**, or **Phishing**. The system will display:
-    - Prediction result
-    - Confidence score
-    - Risk score and risk level
-    - Explanation
-    - Suspicious keywords and URLs
-    - Downloadable PDF report
-
-    ### 📊 Dashboard
-    View statistics and model performance, including:
-    - Dataset class distribution
-    - Machine learning model comparison
-    - Daily analysis activity
-    - Risk score distribution
-
-    ### 🕒 History
-    View, search, export, or delete previous prediction records.
-
-    ### ℹ️ About
-    Learn about the technologies used, machine learning models, and project purpose.
-    """)
-
-    st.divider()
-
-    st.markdown("## ⚙️ How Message Guard Works")
-
-    st.markdown("""
+    st.markdown("## How Message Guard Works")
+    st.markdown(
+        """
     1. Paste a message or email into **Analyze Message**.
     2. The system preprocesses the text using NLP techniques.
     3. The trained machine learning model analyses the message.
     4. A prediction, confidence score, risk score, and explanation are generated.
     5. The analysis is saved to the local prediction history.
-    """)
-
-    if st.session_state.started:
-        st.success("👉 Get started by selecting **Analyze Message** from the navigation menu.")
+    """
+    )
 
 
 def analyze() -> None:
@@ -323,11 +405,16 @@ pages = {
 
 if st.session_state.started:
     # Full navigation unlocked after "Get Started"
-    page = st.sidebar.radio("Navigate", list(pages.keys()))
+    current_index = PAGES.index(st.session_state.nav_page) if st.session_state.nav_page in PAGES else 0
+    selected = st.sidebar.radio("Navigate", PAGES, index=current_index)
+    if selected != st.session_state.nav_page:
+        st.session_state.nav_page = selected
 else:
-    # Only Home is accessible before "Get Started" is clicked
-    st.sidebar.radio("Navigate", ["Home"], disabled=True)
-    st.sidebar.caption("🔒 Click **Get Started** on the Home page to unlock the other sections.")
-    page = "Home"
+    # Locked state: no interactive/disabled widget (avoids the hover glitch),
+    # just a plain caption explaining how to unlock the rest of the app.
+    st.sidebar.markdown("**Navigate**")
+    st.sidebar.markdown("Home")
+    st.sidebar.caption("Click Get Started on the Home page to unlock the other sections.")
+    st.session_state.nav_page = "Home"
 
-pages[page]()
+pages[st.session_state.nav_page]()
