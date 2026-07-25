@@ -33,18 +33,6 @@ if "nav_page" not in st.session_state:
 # ---------------------------------------------------------------------------
 GLOBAL_CSS = """
 <style>
-    :root {
-        --cf-color-bg: #faf8f3;
-        --cf-color-surface: #ffffff;
-        --cf-color-border-100: #e4ddcf;
-        --cf-color-border-200: #cdc2ac;
-        --cf-color-ink-900: #201d18;
-        --cf-color-ink-500: #6f6558;
-        --cf-color-accent-100: #fbe3c8;
-        --cf-color-accent-500: #f6821f;
-        --cf-color-accent-600: #d06c11;
-    }
-
     html, body, [class*="css"]  {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -74,98 +62,26 @@ GLOBAL_CSS = """
         animation: fadeInUp 0.6s ease-out both;
     }
 
-    /* ---------------------------------------------------------------
-       Hero framing: full-bleed dashed rules + light dot-grid backdrop
-       --------------------------------------------------------------- */
-    .cf-dashed-line {
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        width: 100vw;
-        border-top: 1px dashed var(--cf-color-border-200);
-        height: 0;
-    }
-    .cf-hero-frame {
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        width: 100vw;
-        background-color: var(--cf-color-bg);
-        background-image: radial-gradient(var(--cf-color-border-100) 1px, transparent 1px);
-        background-size: 20px 20px;
-        padding: 0.5rem 1rem 1.75rem;
-        display: flex;
-        justify-content: center;
-    }
-    .cf-hero-frame-inner {
-        width: 100%;
-        max-width: 620px;
-    }
-    /* screen-reader-only heading: keeps a real <h1> for accessibility
-       without showing literal title text in the visual design */
-    .cf-sr-only {
-        position: absolute;
-        width: 1px; height: 1px;
-        padding: 0; margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
-    .cf-hero-copy {
-        text-align: center;
-        max-width: 480px;
-        margin: 0.6rem auto 1.25rem;
-        color: var(--cf-color-ink-500);
-        font-size: 1.02rem;
-        line-height: 1.55;
-    }
-
-    /* Get Started / primary buttons: pill-shaped, orange gradient */
+    /* Get Started / primary buttons: prominent, animated on hover */
     .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, var(--cf-color-accent-500), #ff9d3d);
+        background: linear-gradient(135deg, #f6821f, #ff9d3d);
         border: none;
-        border-radius: 999px;
+        border-radius: 6px;
         color: #ffffff;
         font-weight: 700;
-        font-size: 1.0rem;
-        padding: 0.7rem 1.7rem;
+        font-size: 1.05rem;
+        padding: 0.75rem 1.6rem;
         box-shadow: 0 4px 14px rgba(246, 130, 31, 0.35);
         transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
     .stButton > button[kind="primary"]:hover {
         transform: translateY(-2px) scale(1.015);
-        box-shadow: 0 0 0 6px var(--cf-color-accent-100), 0 8px 22px rgba(246, 130, 31, 0.4);
-        background: linear-gradient(135deg, var(--cf-color-accent-600), var(--cf-color-accent-500));
+        box-shadow: 0 8px 22px rgba(246, 130, 31, 0.45);
+        background: linear-gradient(135deg, #e0740f, #f6821f);
         color: #ffffff;
     }
     .stButton > button[kind="primary"]:active {
         transform: translateY(0px) scale(0.99);
-    }
-
-    /* secondary pill button: outlined, transparent */
-    .stButton > button:not([kind="primary"]) {
-        background: transparent;
-        border: 1.5px solid var(--cf-color-border-200);
-        border-radius: 999px;
-        color: var(--cf-color-ink-900);
-        font-weight: 600;
-        font-size: 1.0rem;
-        padding: 0.7rem 1.7rem;
-        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-    .stButton > button:not([kind="primary"]):hover {
-        border-color: var(--cf-color-accent-500);
-        box-shadow: 0 0 0 5px var(--cf-color-accent-100);
-        transform: translateY(-2px);
-        color: var(--cf-color-ink-900);
-    }
-    .stButton > button:not([kind="primary"]):active {
-        transform: translateY(0px);
     }
 
     div[data-testid="stMetric"] {
@@ -190,130 +106,216 @@ GLOBAL_CSS = """
 """
 
 # ---------------------------------------------------------------------------
-# Hero illustration: a small canvas animation standing in for the wordmark.
-# The literal "Message Guard" title is kept as an sr-only <h1> in the outer
-# page (see home()) so screen readers still get a real heading, while the
-# visual focus is this scanning-radar sketch, faded out at the edges with a
-# radial mask so it blends into the dot-grid backdrop behind it.
+# Hero section: dark cybersecurity background + mouse-triggered glitch title
+# Rendered as a self-contained HTML component (own CSS + JS, no Streamlit
+# rerun involved) so the scramble animation is instant and client-side only.
 # ---------------------------------------------------------------------------
-def render_hero_illustration() -> None:
-    html = """
-    <div class="cf-illo-wrap">
+def render_hero(title: str = "EMAIL DETECTION") -> None:
+    html = f"""
+    <div class="hero-wrap">
       <style>
-        * { box-sizing: border-box; }
-        html, body { margin: 0; background: transparent; }
-        .cf-illo-wrap {
+        * {{ box-sizing: border-box; }}
+        .hero-wrap {{
+            position: relative;
             width: 100%;
+            min-height: 380px;
+            border-radius: 14px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 30%, rgba(246, 130, 31, 0.10), transparent 40%),
+                linear-gradient(160deg, #0b0f1a 0%, #10182b 55%, #0b0f1a 100%);
             display: flex;
+            align-items: center;
             justify-content: center;
-            animation: cfIlloFade 0.8s ease-out both;
-        }
-        @keyframes cfIlloFade {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .cf-illo-mask {
-            width: 320px;
-            height: 200px;
-            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 90%);
-            mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 90%);
-        }
-        canvas { display: block; }
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            animation: heroFadeIn 0.8s ease-out both;
+        }}
+        @keyframes heroFadeIn {{
+            from {{ opacity: 0; transform: translateY(10px); }}
+            to   {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        /* faint circuit / grid overlay for the cybersecurity feel */
+        .hero-grid {{
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(148, 197, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 197, 255, 0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 75%);
+        }}
+
+        .hero-inner {{
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2.5rem 1.25rem;
+            max-width: 720px;
+        }}
+
+        .hero-icon {{
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45));
+        }}
+
+        .glitch-title {{
+            position: relative;
+            font-size: clamp(2.1rem, 6vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #f5f7fa;
+            margin: 0 0 0.9rem 0;
+            cursor: default;
+            text-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+            user-select: none;
+        }}
+        .glitch-title span.char {{
+            display: inline-block;
+            min-width: 0.15em;
+        }}
+
+        /* CSS-only fallback: chromatic-split + jitter on hover.
+           Runs purely on :hover so it fires even if, for any reason,
+           the browser did not execute the scramble script below. */
+        .glitch-title::before,
+        .glitch-title::after {{
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            opacity: 0;
+            pointer-events: none;
+        }}
+        .glitch-title:hover {{
+            animation: cfShake 0.4s steps(2, end) infinite;
+        }}
+        .glitch-title:hover::before {{
+            opacity: 0.75;
+            color: #38bdf8;
+            clip-path: inset(0 0 55% 0);
+            animation: cfGlitchTop 0.5s steps(2, end) infinite;
+        }}
+        .glitch-title:hover::after {{
+            opacity: 0.75;
+            color: #f6821f;
+            clip-path: inset(55% 0 0 0);
+            animation: cfGlitchBottom 0.5s steps(2, end) infinite;
+        }}
+        @keyframes cfShake {{
+            0% {{ transform: translate(0,0); }}
+            25% {{ transform: translate(-1px,1px); }}
+            50% {{ transform: translate(1px,-1px); }}
+            75% {{ transform: translate(-1px,-1px); }}
+            100% {{ transform: translate(0,0); }}
+        }}
+        @keyframes cfGlitchTop {{
+            0% {{ transform: translate(0,0); }}
+            33% {{ transform: translate(-4px,-1px); }}
+            66% {{ transform: translate(3px,1px); }}
+            100% {{ transform: translate(0,0); }}
+        }}
+        @keyframes cfGlitchBottom {{
+            0% {{ transform: translate(0,0); }}
+            33% {{ transform: translate(4px,1px); }}
+            66% {{ transform: translate(-3px,-1px); }}
+            100% {{ transform: translate(0,0); }}
+        }}
+
+        .hero-sub {{
+            font-size: clamp(0.92rem, 2vw, 1.05rem);
+            color: #aab3c2;
+            line-height: 1.6;
+            margin: 0 auto;
+        }}
+
+        @media (max-width: 640px) {{
+            .hero-wrap {{ min-height: 320px; border-radius: 10px; }}
+            .hero-inner {{ padding: 1.75rem 1rem; }}
+        }}
       </style>
-      <div class="cf-illo-mask">
-        <canvas id="cfIllo" width="320" height="200"></canvas>
+
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <div class="hero-icon">🛡️</div>
+        <h1 class="glitch-title" id="glitchTitle" data-text="{title}">{title}</h1>
+        <p class="hero-sub">
+          AI-powered spam and phishing detection system that analyses emails and
+          messages using NLP and Machine Learning.
+        </p>
       </div>
     </div>
+
     <script>
-      (function () {
-        const canvas = document.getElementById('cfIllo');
-        const ctx = canvas.getContext('2d');
-        const cx = canvas.width / 2, cy = canvas.height / 2;
-        const ringColor = 'rgba(205, 194, 172, 0.55)';
-        const sweepColor = 'rgba(246, 130, 31, 0.28)';
-        const safeColor = '#cdc2ac';
-        const flagColor = '#f6821f';
+      (function() {{
+        const target = {json.dumps(title)};
+        const el = document.getElementById('glitchTitle');
+        const glitchChars = "!<>-_\\\\/[]{{}}—=+*^?#$%&0123456789";
+        let frame = null;
+        let running = false;
 
-        // orbiting "messages": most are calm dots, one periodically flags
-        const dots = Array.from({ length: 9 }, (_, i) => ({
-            radius: 34 + (i % 3) * 26,
-            angle: (i / 9) * Math.PI * 2,
-            speed: 0.004 + (i % 3) * 0.0015,
-            flagged: false,
-        }));
-        let sweepAngle = 0;
-        let flagTimer = 0;
-        let flaggedIndex = 2;
+        function buildSpans(text) {{
+            el.innerHTML = "";
+            for (const ch of text) {{
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = ch === ' ' ? '\\u00A0' : ch;
+                el.appendChild(span);
+            }}
+        }}
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function randomChar() {{
+            return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        }}
 
-            // concentric radar rings
-            for (let r = 26; r <= 86; r += 20) {
-                ctx.beginPath();
-                ctx.arc(cx, cy, r, 0, Math.PI * 2);
-                ctx.strokeStyle = ringColor;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
+        function playScramble() {{
+            if (running) return;
+            running = true;
+            const spans = Array.from(el.querySelectorAll('.char'));
+            const total = spans.length;
+            const revealDelayPerChar = 55; // ms between each letter locking in
+            const scrambleTickMs = 40;
+            let startTime = performance.now();
 
-            // rotating sweep wedge
-            sweepAngle += 0.018;
-            const grad = ctx.createConicGradient
-                ? ctx.createConicGradient(sweepAngle, cx, cy)
-                : null;
-            ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(cx, cy);
-            ctx.arc(cx, cy, 86, sweepAngle, sweepAngle + 0.9);
-            ctx.closePath();
-            ctx.fillStyle = sweepColor;
-            ctx.fill();
-            ctx.restore();
+            function tick(now) {{
+                const elapsed = now - startTime;
+                const revealCount = Math.min(total, Math.floor(elapsed / revealDelayPerChar));
 
-            // center shield glyph
-            ctx.beginPath();
-            ctx.moveTo(cx, cy - 10);
-            ctx.lineTo(cx + 8, cy - 5);
-            ctx.lineTo(cx + 8, cy + 6);
-            ctx.quadraticCurveTo(cx, cy + 14, cx, cy + 14);
-            ctx.quadraticCurveTo(cx, cy + 14, cx - 8, cy + 6);
-            ctx.lineTo(cx - 8, cy - 5);
-            ctx.closePath();
-            ctx.fillStyle = '#3d372c';
-            ctx.fill();
+                for (let i = 0; i < total; i++) {{
+                    const original = target[i] === ' ' ? '\\u00A0' : target[i];
+                    if (i < revealCount) {{
+                        spans[i].textContent = original;
+                    }} else if (original === '\\u00A0') {{
+                        spans[i].textContent = original;
+                    }} else {{
+                        spans[i].textContent = randomChar();
+                    }}
+                }}
 
-            // orbiting message dots; one flags red-orange when swept
-            flagTimer += 1;
-            if (flagTimer > 150) {
-                flagTimer = 0;
-                flaggedIndex = Math.floor(Math.random() * dots.length);
-            }
-            dots.forEach((d, i) => {
-                d.angle += d.speed;
-                const x = cx + Math.cos(d.angle) * d.radius;
-                const y = cy + Math.sin(d.angle) * d.radius * 0.6;
-                const isFlagged = i === flaggedIndex && flagTimer < 60;
-                ctx.beginPath();
-                ctx.arc(x, y, isFlagged ? 4.5 : 3, 0, Math.PI * 2);
-                ctx.fillStyle = isFlagged ? flagColor : safeColor;
-                ctx.fill();
-                if (isFlagged) {
-                    ctx.beginPath();
-                    ctx.arc(x, y, 8, 0, Math.PI * 2);
-                    ctx.strokeStyle = 'rgba(246, 130, 31, 0.4)';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
-                }
-            });
+                if (revealCount < total) {{
+                    frame = requestAnimationFrame(tick);
+                }} else {{
+                    running = false;
+                }}
+            }}
 
-            requestAnimationFrame(draw);
-        }
-        draw();
-      })();
+            frame = requestAnimationFrame(tick);
+        }}
+
+        function resetTitle() {{
+            if (frame) cancelAnimationFrame(frame);
+            running = false;
+            buildSpans(target);
+        }}
+
+        buildSpans(target);
+        el.addEventListener('mouseenter', playScramble);
+        el.addEventListener('mouseleave', resetTitle);
+      }})();
     </script>
     """
-    components.html(html, height=210, scrolling=False)
+    components.html(html, height=420, scrolling=False)
 
 
 def apply_theme() -> None:
@@ -360,33 +362,13 @@ def go_to(page_name: str) -> None:
 
 
 def home() -> None:
-    st.markdown('<div class="cf-dashed-line"></div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="cf-hero-frame"><div class="cf-hero-frame-inner">',
-        unsafe_allow_html=True,
-    )
+    render_hero("EMAIL DETECTION")
 
-    render_hero_illustration()
-
-    st.markdown(
-        '<h1 class="cf-sr-only">Message Guard — AI Email &amp; SMS Threat Detection</h1>'
-        '<p class="cf-hero-copy">Paste a message and get an instant read on '
-        'whether it&rsquo;s safe, spam, or phishing.</p>',
-        unsafe_allow_html=True,
-    )
-
-    _, c1, c2, _ = st.columns([1.1, 1, 1, 1.1])
-    with c1:
+    _, mid, _ = st.columns([1, 1, 1])
+    with mid:
         if st.button("Get Started", type="primary", use_container_width=True):
             st.session_state.started = True
             go_to("Analyze Message")
-    with c2:
-        if st.button("See How It Works", use_container_width=True):
-            st.session_state.started = True
-            go_to("About")
-
-    st.markdown('</div></div>', unsafe_allow_html=True)
-    st.markdown('<div class="cf-dashed-line"></div>', unsafe_allow_html=True)
 
     st.markdown('<div class="cf-fade">', unsafe_allow_html=True)
     st.divider()
