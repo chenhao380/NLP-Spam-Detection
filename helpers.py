@@ -16,7 +16,11 @@ KEYWORDS = {
 }
 URL_PATTERN = re.compile(r"(?:https?://|www\.)[^\s<>]+", re.IGNORECASE)
 EMAIL_PATTERN = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
-PHONE_PATTERN = re.compile(r"(?<!\w)(?:\+?\d[\d\s()\-]{6,}\d)")
+PHONE_PATTERN = re.compile(r"(?<!\w)(?:\+?\d[\d\s()\-]{6,}\d)(?!\w)")
+SUSPICIOUS_URL_PATTERN = re.compile(
+    r"(?:\d{1,3}\.){3}\d{1,3}|bit\.ly|tinyurl|login|verify|secure|account|password|update",
+    re.IGNORECASE,
+)
 
 
 def find_indicators(message: str) -> dict[str, Any]:
@@ -24,9 +28,11 @@ def find_indicators(message: str) -> dict[str, Any]:
     lowered = message.lower()
     found = {category: [term for term in terms if term in lowered] for category, terms in KEYWORDS.items()}
     found = {key: value for key, value in found.items() if value}
+    urls = URL_PATTERN.findall(message)
     return {
         "keywords": found,
-        "urls": URL_PATTERN.findall(message),
+        "urls": urls,
+        "suspicious_urls": [url for url in urls if SUSPICIOUS_URL_PATTERN.search(url)],
         "emails": EMAIL_PATTERN.findall(message),
         "phones": PHONE_PATTERN.findall(message),
         "caps": len(re.findall(r"\b[A-Z]{3,}\b", message)),
@@ -39,6 +45,7 @@ def calculate_risk(probabilities: dict[str, float], indicators: dict[str, Any]) 
     base = 100 * (probabilities.get("spam", 0) + probabilities.get("phishing", 0))
     keyword_count = sum(len(items) for items in indicators["keywords"].values())
     score = base + min(keyword_count * 4, 16) + (12 if indicators["urls"] else 0)
+    score += min(len(indicators.get("suspicious_urls", [])) * 6, 18)
     score += 5 if indicators["emails"] else 0
     score += 5 if indicators["phones"] else 0
     score += min(indicators["caps"] * 2, 8) + (5 if indicators["repeated_punctuation"] else 0)
@@ -53,7 +60,9 @@ def explanation(prediction: str, indicators: dict[str, Any]) -> str:
     words = [word.upper() for group in indicators["keywords"].values() for word in group]
     if words:
         parts.append("suspicious language: " + ", ".join(words))
-    if indicators["urls"]:
+    if indicators.get("suspicious_urls"):
+        parts.append("a suspicious URL")
+    elif indicators["urls"]:
         parts.append("a URL")
     if indicators["repeated_punctuation"]:
         parts.append("repeated punctuation")
