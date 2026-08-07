@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """Message Guard — AI-powered spam and phishing detector (single-file build).
 
 This file merges what used to be config.py, preprocess.py, evaluation.py,
@@ -790,22 +789,6 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_hei
     </script>
     """
     components.html(html, height=component_height, scrolling=False)
-=======
-"""Streamlit interface for the AI-powered spam and phishing detector."""
-import json
-from io import BytesIO
-import pandas as pd
-import plotly.express as px
-import streamlit as st
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-
-from config import DATASET_PATH, METRICS_PATH
-from predict import SpamDetector
-from utils.helpers import append_history, clear_history, load_history
-
-st.set_page_config(page_title="Message Guard", page_icon="🛡️", layout="wide")
->>>>>>> 10d5b18ae4a9502527a861c5fa4acbe1cd0ef02e
 
 def apply_theme() -> None:
     st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
@@ -1123,7 +1106,6 @@ def about() -> None:
     st.warning("Predictions are decision support, not a replacement for security controls. Do not open unexpected links or disclose credentials.")
 
 apply_theme()
-<<<<<<< HEAD
 
 pages = {
     "Home": home,
@@ -1164,7 +1146,3 @@ if st.session_state.started:
 # else: nothing rendered in the sidebar on Home — it stays collapsed
 
 pages[st.session_state.nav_page]()
-=======
-page = st.sidebar.radio("Navigate", ["Home", "Analyze Message", "Dashboard", "History", "About"])
-{"Home": home, "Analyze Message": analyze, "Dashboard": dashboard, "History": history_page, "About": about}[page]()
->>>>>>> 10d5b18ae4a9502527a861c5fa4acbe1cd0ef02e
