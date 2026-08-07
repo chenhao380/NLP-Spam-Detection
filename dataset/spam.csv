@@ -1,5 +1,5 @@
 message,label
-"Good morning, I hope you have a great day.",ham
+Good morning, I hope you have a great day.,ham
 Can you send me the meeting schedule?,ham
 I will arrive at the office around 9 AM.,ham
 Please remember to bring the documents tomorrow.,ham
@@ -100,597 +100,597 @@ The assignment instructions are available online.,ham
 I have received the confirmation email.,ham
 The system is working normally.,ham
 See you tomorrow at campus.,ham
-"""Congratulations! You have won a free smartphone. Claim your prize now!""",spam
-"""Limited time offer! Get 70% discount on all products today.""",spam
-"""FREE voucher waiting for you. Click to redeem now!""",spam
-"""You are selected as our lucky winner. Reply YES to receive your gift.""",spam
-"""Exclusive promotion! Buy now and receive a special bonus.""",spam
-"""Earn extra income from home. No experience required!""",spam
-"""Congratulations! Your account has been chosen for a cash reward.""",spam
-"""Flash sale starts now! Save big on your favourite items.""",spam
-"""Get free shopping coupons today. Register immediately.""",spam
-"""Special offer only for you. Claim your reward before it expires.""",spam
-"""Win a brand new laptop by joining our lucky draw.""",spam
-"""Act fast! Free membership available for limited users.""",spam
-"""Your chance to receive RM500 cash is here. Apply now!""",spam
-"""Big discount alert! Purchase today and save more.""",spam
-"""Congratulations! You have unlocked a premium reward.""",spam
-"""Free tickets available now. Click to reserve your seat.""",spam
-"""Don't miss this amazing deal. Order before midnight.""",spam
-"""Lowest price guaranteed. Shop now and enjoy huge savings.""",spam
-"""Get a free gift with every purchase today.""",spam
-"""Exclusive customer reward available. Claim immediately.""",spam
-"""Limited offer! Subscribe now and get one month free.""",spam
-"""You have been selected for a special promotion.""",spam
-"""Receive cashback rewards when you register today.""",spam
-"""Buy one get one free offer starts now.""",spam
-"""Special clearance sale! Everything must go.""",spam
-"""Congratulations! You are eligible for a free holiday package.""",spam
-"""Earn money quickly with our online opportunity.""",spam
-"""Claim your free data package before it ends.""",spam
-"""New users receive a welcome bonus. Sign up today.""",spam
-"""Massive sale event! Prices reduced for a limited time.""",spam
-"""Get exclusive VIP access with your free membership.""",spam
-"""Your reward points can be exchanged for gifts now.""",spam
-"""Win exciting prizes by completing this short survey.""",spam
-"""Free movie subscription available. Activate today.""",spam
-"""Huge savings available. Shop our latest collection now.""",spam
-"""Special deal for selected customers only.""",spam
-"""Congratulations! You have received a shopping voucher.""",spam
-"""Join our giveaway and win amazing prizes.""",spam
-"""Limited stock available. Order yours before it sells out.""",spam
-"""Get RM100 instantly by downloading our application.""",spam
-"""Today's special offer cannot be missed.""",spam
-"""Unlock your exclusive discount code now.""",spam
-"""Free delivery promotion available this week only.""",spam
-"""Become a member today and receive rewards.""",spam
-"""Your lucky number has been selected. Claim your prize.""",spam
-"""Big promotion! Save up to 90% on selected items.""",spam
-"""Get instant approval for our special offer.""",spam
-"""Congratulations! You have won a shopping credit.""",spam
-"""Special bonus waiting for you. Click to collect.""",spam
-"""Limited invitation: Join our premium program today.""",spam
-"""Receive a free gift card by participating now.""",spam
-"""Exclusive online deal available for today only.""",spam
-"""Earn thousands monthly through our easy program.""",spam
-"""Your free coupon is ready. Redeem before expiry.""",spam
-"""Buy now and receive additional rewards.""",spam
-"""Super sale begins today. Don't miss the opportunity.""",spam
-"""Claim your free upgrade package now.""",spam
-"""Congratulations! You are one of our selected customers.""",spam
-"""Get a special discount by clicking this offer.""",spam
-"""Free trial available. Subscribe immediately.""",spam
-"""Save money with our amazing limited promotion.""",spam
-"""Receive bonus points after completing registration.""",spam
-"""Hot deal alert! Prices reduced for a short period.""",spam
-"""Join our reward program and get free benefits.""",spam
-"""Your exclusive coupon is waiting. Use it now.""",spam
-"""Special offer ends tonight. Purchase before deadline.""",spam
-"""Win cash prizes by entering our competition.""",spam
-"""Free accessories available for new customers.""",spam
-"""Get instant rewards after signing up today.""",spam
-"""Congratulations! Your name appears on our winner list.""",spam
-"""Claim your special package before someone else takes it.""",spam
-"""Online shopping festival starts now. Enjoy discounts.""",spam
-"""Receive a free bonus when you complete this offer.""",spam
-"""New promotion launched. Register to participate.""",spam
-"""Limited quantity available. Buy immediately.""",spam
-"""Get your free reward by replying YES now.""",spam
-"""Exclusive deal for loyal customers. Act today.""",spam
-"""Special announcement! You have received a reward.""",spam
-"""Free subscription offer available for a limited time.""",spam
-"""Increase your income with our simple online method.""",spam
-"""Congratulations! Collect your free electronics voucher.""",spam
-"""Discount code available. Use it before it expires.""",spam
-"""Don't wait! This amazing offer ends soon.""",spam
-"""Claim your bonus reward with one simple step.""",spam
-"""Special promotion for new members only.""",spam
-"""Win an iPhone by joining our giveaway today.""",spam
-"""Get free internet data by registering now.""",spam
-"""Exclusive shopping deal available immediately.""",spam
-"""Your chance to save money starts today.""",spam
-"""Receive a gift package after completing this form.""",spam
-"""Limited-time reward. Click now to claim.""",spam
-"""Huge discounts on electronics. Shop today.""",spam
-"""Congratulations! You have been selected for a prize.""",spam
-"""Free coupons available while supplies last.""",spam
-"""Special customer offer. Activate now.""",spam
-"""Earn rewards easily with our new program.""",spam
-"""Get cashback instantly after purchase.""",spam
-"""Last chance! Claim your free reward today.""",spam
-"""Congratulations! You have been chosen for our exclusive giveaway.""",spam
-"""Get your free Amazon gift card today. Claim before midnight.""",spam
-"""Amazing opportunity! Start earning money immediately.""",spam
-"""Special promotion! Enjoy massive discounts on selected products.""",spam
-"""Free reward available. Click the link to receive it now.""",spam
-"""Your lucky draw entry has been approved. Collect your prize.""",spam
-"""Limited offer! Get premium access at no cost.""",spam
-"""Save up to 80% with our special shopping event.""",spam
-"""Congratulations! A surprise gift is waiting for you.""",spam
-"""Earn cash rewards by completing simple online tasks.""",spam
-"""Exclusive offer for registered users. Join today.""",spam
-"""Free mobile data package available. Activate now.""",spam
-"""Hot deal! Purchase today and receive extra bonuses.""",spam
-"""Win exciting prizes in our monthly competition.""",spam
-"""Your reward coupon is about to expire. Redeem now.""",spam
-"""Special discount unlocked. Click to use your voucher.""",spam
-"""Get a free trial of our premium service today.""",spam
-"""Massive savings available only for a limited time.""",spam
-"""Congratulations! You are eligible for a special gift.""",spam
-"""Receive RM300 shopping credit by signing up now.""",spam
-"""New customers get free rewards instantly.""",spam
-"""Exclusive flash sale! Prices dropped today only.""",spam
-"""Claim your bonus points before they disappear.""",spam
-"""Free samples available. Request yours now.""",spam
-"""Don't miss this unbelievable promotion.""",spam
-"""Get instant cashback after registration.""",spam
-"""Congratulations! Your reward has been reserved.""",spam
-"""Special deal alert! Save more when you buy now.""",spam
-"""Win a luxury phone through our lucky draw.""",spam
-"""Free membership upgrade available today.""",spam
-"""Your special offer is ready. Click to activate.""",spam
-"""Earn extra income with our simple online system.""",spam
-"""Limited seats available. Register immediately.""",spam
-"""Exclusive invitation! Join our premium club.""",spam
-"""Free delivery and discounts available this week.""",spam
-"""Congratulations! You have received a bonus reward.""",spam
-"""Get unlimited access with our special package.""",spam
-"""Today only! Huge discount on all items.""",spam
-"""Your free voucher is waiting. Redeem now.""",spam
-"""Special customer promotion. Take advantage today.""",spam
-"""Win cash prizes instantly by joining our contest.""",spam
-"""New deal launched! Buy now before it ends.""",spam
-"""Get a surprise reward after completing this survey.""",spam
-"""Congratulations! You are among our top winners.""",spam
-"""Free upgrade offer available for selected users.""",spam
-"""Claim your shopping credits before the deadline.""",spam
-"""Exclusive sale event begins now.""",spam
-"""Save more money with our limited promotion.""",spam
-"""Get your bonus gift after a quick registration.""",spam
-"""Free entertainment subscription available now.""",spam
-"""Special offer! Receive additional benefits today.""",spam
-"""Your account has earned reward points. Exchange them now.""",spam
-"""Join our lucky draw and win amazing prizes.""",spam
-"""Big clearance sale! Everything must be sold.""",spam
-"""Earn money online without investment.""",spam
-"""Congratulations! Your free package is ready.""",spam
-"""Click now to unlock your special discount.""",spam
-"""Limited time bonus! Do not miss this chance.""",spam
-"""Get a free shopping voucher instantly.""",spam
-"""Exclusive online promotion for selected customers.""",spam
-"""Special reward program starts today.""",spam
-"""Win a free holiday trip by entering now.""",spam
-"""Your discount code has been generated.""",spam
-"""Get amazing prices on our latest products.""",spam
-"""Free bonus available for new registrations.""",spam
-"""Congratulations! You have won a special prize.""",spam
-"""Enjoy 50% off your next purchase today.""",spam
-"""Act quickly! This offer expires soon.""",spam
-"""Receive free gifts when you shop with us.""",spam
-"""Join today and unlock premium benefits.""",spam
-"""Special package available at a very low price.""",spam
-"""Get instant rewards by downloading our app.""",spam
-"""Exclusive deal created just for you.""",spam
-"""Your chance to win starts now.""",spam
-"""Limited promotion! Order before stock runs out.""",spam
-"""Free coupons are available for everyone.""",spam
-"""Earn rewards by inviting your friends.""",spam
-"""Congratulations! Your application for a reward was approved.""",spam
-"""Special discount waiting for you inside.""",spam
-"""Claim your free bonus before it is gone.""",spam
-"""Big savings event begins this weekend.""",spam
-"""Receive a gift card after completing registration.""",spam
-"""New users can get a welcome reward.""",spam
-"""Special offer! Buy more and save more.""",spam
-"""Free premium service for selected customers.""",spam
-"""Get your exclusive deal today.""",spam
-"""Reward notification: claim your prize now.""",spam
-"""Win exciting gifts through our online campaign.""",spam
-"""Limited-time coupon available now.""",spam
-"""Start earning additional income today.""",spam
-"""Your free item is waiting for confirmation.""",spam
-"""Special shopping event with huge discounts.""",spam
-"""Congratulations! You have been selected for a bonus.""",spam
-"""Activate your free membership now.""",spam
-"""Save money with this amazing offer.""",spam
-"""Receive a free gift after joining our program.""",spam
-"""Final reminder! Claim your promotion today.""",spam
-"""Get access to exclusive deals instantly.""",spam
-"""Flash promotion ends soon. Shop now.""",spam
-"""Your reward is ready. Confirm to receive it.""",spam
-"""Congratulations! You have unlocked a special reward today.""",spam
-"""Get 90% discount on our products. Shop immediately.""",spam
-"""Free bonus points are available. Redeem them now.""",spam
-"""Limited time deal! Purchase before the offer ends.""",spam
-"""Win a brand new device in our online giveaway.""",spam
-"""Your exclusive reward package is ready to collect.""",spam
-"""Join now and receive a welcome bonus instantly.""",spam
-"""Special offer for you! Click to claim your discount.""",spam
-"""Earn extra money with our easy online opportunity.""",spam
-"""Free shopping voucher available for selected users.""",spam
-"""Congratulations! Your prize notification has arrived.""",spam
-"""Get a free upgrade by activating this offer.""",spam
-"""Huge promotion! Save more when you order today.""",spam
-"""Your lucky reward is waiting. Claim it now.""",spam
-"""Exclusive member benefits available immediately.""",spam
-"""Free gifts available while supplies last.""",spam
-"""Special weekend sale! Enjoy amazing discounts.""",spam
-"""Congratulations! You have received a bonus coupon.""",spam
-"""Unlock premium features with our special deal.""",spam
-"""Claim your free package before it expires.""",spam
-"""Limited stock! Buy now before it is gone.""",spam
-"""Get cashback rewards from every purchase.""",spam
-"""Special invitation! Become a VIP customer today.""",spam
-"""Win exciting prizes by joining our campaign.""",spam
-"""Free internet package available. Register now.""",spam
-"""Congratulations! You are selected for a special offer.""",spam
-"""Save up to 75% with our latest promotion.""",spam
-"""Your discount voucher is ready to use.""",spam
-"""Act now and receive a free surprise gift.""",spam
-"""Exclusive sale event starts today.""",spam
-"""Earn rewards quickly with our new program.""",spam
-"""Get free access to premium services.""",spam
-"""Congratulations! Claim your free electronics gift.""",spam
-"""Special deal available only for today.""",spam
-"""Receive instant rewards after completing registration.""",spam
-"""Big announcement! A special reward is waiting.""",spam
-"""Get your free coupon by clicking now.""",spam
-"""New customers receive exclusive benefits.""",spam
-"""Limited offer! Subscribe and get extra rewards.""",spam
-"""Your bonus credit has been added. Use it now.""",spam
-"""Join our promotion and win amazing prizes.""",spam
-"""Free trial available. Start using it today.""",spam
-"""Congratulations! Your name has been selected.""",spam
-"""Special discount code available now.""",spam
-"""Get huge savings with this limited offer.""",spam
-"""Receive free gifts with your next purchase.""",spam
-"""Win cash prizes through our lucky draw.""",spam
-"""Exclusive promotion ends soon. Take action now.""",spam
-"""Your free reward is waiting for confirmation.""",spam
-"""Get instant approval for our special package.""",spam
-"""Limited time! Enjoy our biggest sale event.""",spam
-"""Congratulations! You have earned a free voucher.""",spam
-"""Free subscription available for new users.""",spam
-"""Increase your income with our simple method.""",spam
-"""Claim your reward points before they expire.""",spam
-"""Special offer unlocked for your account.""",spam
-"""Get a free gift card today.""",spam
-"""Massive discounts available on selected items.""",spam
-"""Your chance to win a prize is here.""",spam
-"""Exclusive customer reward program launched.""",spam
-"""Receive special bonuses when you register.""",spam
-"""Congratulations! Your reward has been approved.""",spam
-"""Save money today with our amazing deals.""",spam
-"""Free delivery offer available now.""",spam
-"""Join the competition and win great prizes.""",spam
-"""Limited promotion! Order quickly.""",spam
-"""Get your special coupon immediately.""",spam
-"""New reward system launched. Join today.""",spam
-"""Receive extra benefits by signing up.""",spam
-"""Congratulations! You are our lucky customer.""",spam
-"""Special discount available before midnight.""",spam
-"""Claim your free item now.""",spam
-"""Exclusive online offer created for you.""",spam
-"""Earn rewards from your daily activities.""",spam
-"""Free products available for early users.""",spam
-"""Big sale! Lowest prices guaranteed.""",spam
-"""Your special bonus is ready.""",spam
-"""Get unlimited benefits with our premium plan.""",spam
-"""Congratulations! You have won a special gift.""",spam
-"""Activate your reward account today.""",spam
-"""Free promotional items available now.""",spam
-"""Shop today and receive extra discounts.""",spam
-"""Limited-time giveaway starts now.""",spam
-"""Get your free voucher instantly.""",spam
-"""Special offer! Don't miss this opportunity.""",spam
-"""Receive cashback after completing your purchase.""",spam
-"""Win a smartphone by joining our contest.""",spam
-"""Your exclusive deal is waiting.""",spam
-"""Save more with our latest shopping event.""",spam
-"""Congratulations! You are eligible for a free reward.""",spam
-"""Get bonus points by registering today.""",spam
-"""Free membership invitation available.""",spam
-"""Claim your promotion before it ends.""",spam
-"""Special reward available for loyal customers.""",spam
-"""Earn money easily with our online service.""",spam
-"""Your gift package is ready to be collected.""",spam
-"""Big discount alert! Shop now.""",spam
-"""Receive a free upgrade immediately.""",spam
-"""Final chance! Claim your offer today.""",spam
-"""Your account has been suspended. Verify your identity immediately.""",phishing
-"""Security alert: suspicious login detected. Confirm your password now.""",phishing
-"""Your bank account requires urgent verification. Click the secure link.""",phishing
-"""Your email account will be closed unless you verify your information.""",phishing
-"""Unusual activity detected. Login now to secure your account.""",phishing
-"""Your password has expired. Reset it immediately using this link.""",phishing
-"""Microsoft security team: confirm your account details to continue.""",phishing
-"""Your Apple ID has been locked. Verify your information now.""",phishing
-"""Bank alert: Your account access is limited. Confirm your details.""",phishing
-"""We detected unauthorized activity. Please verify your account.""",phishing
-"""Your online banking session has expired. Re-login to continue.""",phishing
-"""Security warning: someone accessed your account. Change password now.""",phishing
-"""Your payment information needs to be updated to avoid suspension.""",phishing
-"""Your account will be permanently closed. Verify immediately.""",phishing
-"""Confirm your identity to prevent account restriction.""",phishing
-"""Your mailbox is full. Login to increase storage capacity.""",phishing
-"""Important notice: Your account requires security confirmation.""",phishing
-"""Your transaction was blocked. Verify your payment details.""",phishing
-"""Your bank detected suspicious activity. Follow the verification process.""",phishing
-"""Your profile information is incomplete. Update it now.""",phishing
-"""Your account has been compromised. Reset your password immediately.""",phishing
-"""Security check required. Confirm your login information.""",phishing
-"""Your credit card has been disabled. Update your details now.""",phishing
-"""Your subscription payment failed. Enter your card information again.""",phishing
-"""Your account access will expire today. Verify now.""",phishing
-"""Google security alert: suspicious sign-in detected on your account.""",phishing
-"""Your account has unusual login attempts. Secure your account now.""",phishing
-"""Confirm your password to restore account access.""",phishing
-"""Your online service account is at risk. Verify your identity.""",phishing
-"""Your banking profile needs confirmation immediately.""",phishing
-"""Security notification: Login from unknown device detected.""",phishing
-"""Your account has been restricted due to suspicious activity.""",phishing
-"""Verify your personal information to unlock your account.""",phishing
-"""Your payment method was rejected. Update your billing information.""",phishing
-"""Your account recovery requires identity verification.""",phishing
-"""Your email security settings need immediate confirmation.""",phishing
-"""Your account has been temporarily locked. Click to unlock.""",phishing
-"""Important security update required. Confirm your account details.""",phishing
-"""Your password reset request is pending. Verify now.""",phishing
-"""Your financial account needs verification to avoid closure.""",phishing
-"""Your login credentials may have been exposed. Change them now.""",phishing
-"""Your account protection has expired. Renew it immediately.""",phishing
-"""Your transaction requires additional verification.""",phishing
-"""Security alert from your bank. Confirm recent activity.""",phishing
-"""Your account will be deleted unless you verify your identity.""",phishing
-"""Your payment account has been blocked. Restore access now.""",phishing
-"""Your device has been linked to another account. Verify ownership.""",phishing
-"""Your email access has been limited. Confirm your details.""",phishing
-"""Suspicious activity detected on your account. Login to review.""",phishing
-"""Your security information needs updating. Complete verification.""",phishing
-"""Your account verification failed. Submit your details again.""",phishing
-"""Your bank requires confirmation of your personal information.""",phishing
-"""Your account has been accessed from an unknown location.""",phishing
-"""Your password must be updated due to security reasons.""",phishing
-"""Your account is under review. Verify your information now.""",phishing
-"""Confirm your identity to prevent unauthorized access.""",phishing
-"""Your service account will be suspended without verification.""",phishing
-"""Your payment details are outdated. Update them immediately.""",phishing
-"""Your account has a security problem. Follow the instructions.""",phishing
-"""Your login session expired. Sign in again to continue.""",phishing
-"""Your security verification is incomplete. Finish it now.""",phishing
-"""Your account needs urgent attention. Verify immediately.""",phishing
-"""Your personal details have not been confirmed. Update now.""",phishing
-"""Your online account has been flagged. Confirm ownership.""",phishing
-"""Your bank security team needs your verification response.""",phishing
-"""Your account recovery link is waiting. Confirm now.""",phishing
-"""Your identity verification failed. Submit documents again.""",phishing
-"""Your account protection requires immediate action.""",phishing
-"""Your email account has suspicious activity. Secure it now.""",phishing
-"""Your banking access has been disabled. Restore it immediately.""",phishing
-"""Your account information must be updated today.""",phishing
-"""Your security token has expired. Request a new one now.""",phishing
-"""Your account is temporarily unavailable. Verify to restore access.""",phishing
-"""Your payment was declined. Confirm your card details.""",phishing
-"""Your account has been selected for a security check.""",phishing
-"""Your login details need confirmation before continuing.""",phishing
-"""Your account has been marked as suspicious. Verify now.""",phishing
-"""Your online profile requires immediate verification.""",phishing
-"""Your account will lose access unless you confirm your identity.""",phishing
-"""Security notification: Please confirm your account information.""",phishing
-"""Your password recovery request requires verification.""",phishing
-"""Your account settings have changed. Confirm if this was you.""",phishing
-"""Your financial information requires security confirmation.""",phishing
-"""Your account has encountered a security issue. Login now.""",phishing
-"""Your account credentials need to be verified.""",phishing
-"""Your service access is limited. Update your information.""",phishing
-"""Your account has been frozen. Complete verification to unlock.""",phishing
-"""Your bank profile requires immediate confirmation.""",phishing
-"""Your email password needs renewal. Click to reset.""",phishing
-"""Your account has detected unusual activity. Verify now.""",phishing
-"""Your identity confirmation is required to continue using services.""",phishing
-"""Your account has expired. Reactivate it by verifying details.""",phishing
-"""Your security check failed. Confirm your information again.""",phishing
-"""Your account requires additional authentication.""",phishing
-"""Your payment account needs urgent verification.""",phishing
-"""Your login attempt was blocked. Confirm your identity.""",phishing
-"""Your account is at risk. Secure it immediately.""",phishing
-"""Your account details must be updated before access is removed.""",phishing
-"""Maybank security alert: Your account has unusual activity. Verify now.""",phishing
-"""Touch 'n Go eWallet: Your account is locked. Confirm your identity immediately.""",phishing
-"""Shopee security team: Your account requires verification to avoid suspension.""",phishing
-"""Grab account warning: Please confirm your payment information.""",phishing
-"""PayPal alert: Your account access has been restricted. Verify your details.""",phishing
-"""Apple ID security notice: Your account has been disabled. Restore access now.""",phishing
-"""Google account warning: Sign-in attempt detected. Confirm your identity.""",phishing
-"""Microsoft account alert: Your password needs immediate verification.""",phishing
-"""Netflix security notice: Update your payment details to continue service.""",phishing
-"""Amazon security alert: Verify your account information to prevent closure.""",phishing
-"""Your bank account has been frozen due to suspicious transactions.""",phishing
-"""Your online banking password has expired. Reset it immediately.""",phishing
-"""Security department requires your account verification within 24 hours.""",phishing
-"""Your payment card has been blocked. Confirm your details to unlock it.""",phishing
-"""Your e-wallet account needs identity verification before use.""",phishing
-"""Your account has detected suspicious login from another country.""",phishing
-"""Verify your banking information to avoid permanent account suspension.""",phishing
-"""Your account recovery process requires personal information confirmation.""",phishing
-"""Your email account has been hacked. Change your password immediately.""",phishing
-"""Your account security level is low. Upgrade protection now.""",phishing
-"""Your online shopping account has been compromised. Verify ownership.""",phishing
-"""Your wallet balance is frozen. Complete verification to restore access.""",phishing
-"""Your transaction is pending. Confirm your banking details.""",phishing
-"""Your account has failed security verification. Submit information again.""",phishing
-"""Your identity check is incomplete. Complete the process now.""",phishing
-"""Your card payment failed. Update your card information immediately.""",phishing
-"""Your account will be suspended due to incomplete verification.""",phishing
-"""Security alert: Unknown device signed into your account.""",phishing
-"""Your account requires two-factor authentication setup. Verify now.""",phishing
-"""Your login information has expired. Confirm your credentials.""",phishing
-"""Your account has been flagged for suspicious behavior.""",phishing
-"""Your bank needs additional information to approve your transaction.""",phishing
-"""Your online account will be deleted unless action is taken.""",phishing
-"""Your account access has been limited. Verify your personal details.""",phishing
-"""Your password reset link is ready. Confirm your account first.""",phishing
-"""Your account has a critical security issue. Login to fix it.""",phishing
-"""Your financial profile requires immediate verification.""",phishing
-"""Your payment method needs confirmation to avoid service interruption.""",phishing
-"""Your account ownership must be confirmed today.""",phishing
-"""Your security certificate has expired. Renew your account now.""",phishing
-"""Your account has been selected for mandatory verification.""",phishing
-"""Your login attempt requires confirmation. Verify immediately.""",phishing
-"""Your online service has detected unauthorized access.""",phishing
-"""Your account information does not match our records. Update now.""",phishing
-"""Your bank security team requests confirmation of your details.""",phishing
-"""Your account is temporarily disabled. Verify to reactivate.""",phishing
-"""Your payment account has suspicious activity. Review now.""",phishing
-"""Your email service requires password confirmation.""",phishing
-"""Your account has reached a security limit. Verify your identity.""",phishing
-"""Your account needs urgent recovery. Submit your details.""",phishing
-"""Your mobile banking access has been suspended. Restore it now.""",phishing
-"""Your account requires a security update before continuing.""",phishing
-"""Your identity verification expires today. Complete it immediately.""",phishing
-"""Your account has an unauthorized transaction. Confirm your information.""",phishing
-"""Your bank card security check requires verification.""",phishing
-"""Your account has been temporarily restricted. Click to unlock.""",phishing
-"""Your online profile needs confirmation due to security reasons.""",phishing
-"""Your account has suspicious activity from a new location.""",phishing
-"""Your payment details have changed. Confirm this update.""",phishing
-"""Your account protection needs renewal. Verify now.""",phishing
-"""Your service provider detected unusual account behavior.""",phishing
-"""Your account recovery requires a security code confirmation.""",phishing
-"""Your personal information needs updating to maintain access.""",phishing
-"""Your account login has been blocked. Confirm your identity.""",phishing
-"""Your financial account requires immediate action.""",phishing
-"""Your account has been locked after multiple failed attempts.""",phishing
-"""Your security settings require verification.""",phishing
-"""Your account access will expire soon. Confirm now.""",phishing
-"""Your payment account has been suspended temporarily.""",phishing
-"""Your account has been reported for suspicious activity.""",phishing
-"""Your bank requires confirmation before processing your transaction.""",phishing
-"""Your account details must be reviewed immediately.""",phishing
-"""Your email storage is full. Login to increase your limit.""",phishing
-"""Your account has a pending security review.""",phishing
-"""Your identity has not been verified. Complete the process.""",phishing
-"""Your account will be disabled if verification is not completed.""",phishing
-"""Your card information needs to be updated urgently.""",phishing
-"""Your online account requires a new security confirmation.""",phishing
-"""Your account has unauthorized access attempts. Secure it now.""",phishing
-"""Your password has been changed. Confirm if this was you.""",phishing
-"""Your account has a suspicious payment request.""",phishing
-"""Your banking session requires re-authentication.""",phishing
-"""Your account verification deadline is approaching.""",phishing
-"""Your account has been selected for security inspection.""",phishing
-"""Your login credentials are at risk. Update them now.""",phishing
-"""Your account requires identity confirmation to continue.""",phishing
-"""Your account has been blocked because of unusual activity.""",phishing
-"""Your security verification failed. Try again immediately.""",phishing
-"""Your payment information is incomplete. Update now.""",phishing
-"""Your account access is restricted until verification.""",phishing
-"""Your account has received a suspicious login alert.""",phishing
-"""Your online banking account needs confirmation.""",phishing
-"""Your account requires immediate security attention.""",phishing
-"""Your profile has been marked for review. Verify now.""",phishing
-"""Your account has expired. Reactivate it today.""",phishing
-"""Your account security check requires additional information.""",phishing
-"""Your account has a pending verification request.""",phishing
-"""Your account has been compromised. Take action immediately.""",phishing
-"""Your account has been flagged due to suspicious activity. Verify immediately.""",phishing
-"""Security warning: Your login details may have been stolen. Change your password now.""",phishing
-"""Your bank account requires confirmation before the transaction can proceed.""",phishing
-"""Your account access has been temporarily disabled. Verify your identity.""",phishing
-"""Your email account security has failed. Confirm your information now.""",phishing
-"""Your account has an unauthorized login attempt. Secure your account immediately.""",phishing
-"""Your payment has been declined. Update your billing information to continue.""",phishing
-"""Your account verification is incomplete. Complete the process today.""",phishing
-"""Your password reset request requires confirmation. Verify your account.""",phishing
-"""Your account will be closed due to inactivity. Login to reactivate it.""",phishing
-"""Your security information needs updating. Confirm your details now.""",phishing
-"""Your bank detected unusual activity. Review your account immediately.""",phishing
-"""Your account has been restricted. Submit your information to restore access.""",phishing
-"""Your online account requires urgent verification.""",phishing
-"""Your identity cannot be confirmed. Provide additional details now.""",phishing
-"""Your account has been accessed from an unknown device.""",phishing
-"""Your card has been blocked. Verify your payment details immediately.""",phishing
-"""Your account security requires immediate attention.""",phishing
-"""Your account has expired. Confirm your information to continue using services.""",phishing
-"""Your transaction requires additional security verification.""",phishing
-"""Your account has been locked. Click to unlock your access.""",phishing
-"""Your online banking requires a security update.""",phishing
-"""Your account details have changed. Confirm whether this was you.""",phishing
-"""Your login session is invalid. Sign in again to verify.""",phishing
-"""Your account is at risk. Complete verification now.""",phishing
-"""Your personal details need confirmation to prevent account suspension.""",phishing
-"""Your security code has expired. Request a new verification code.""",phishing
-"""Your account has a pending verification request. Complete it immediately.""",phishing
-"""Your payment account requires identity confirmation.""",phishing
-"""Your account has suspicious activity from a foreign location.""",phishing
-"""Your email password needs to be updated due to security concerns.""",phishing
-"""Your account has been compromised. Follow the recovery steps now.""",phishing
-"""Your account recovery requires confirmation of personal details.""",phishing
-"""Your bank profile needs to be verified before the deadline.""",phishing
-"""Your account access will be removed unless you verify now.""",phishing
-"""Your security settings have changed. Confirm your account details.""",phishing
-"""Your account has failed the security check. Verify again.""",phishing
-"""Your payment card information requires immediate update.""",phishing
-"""Your account has been placed under security review.""",phishing
-"""Your account requires authentication before continuing.""",phishing
-"""Your online wallet has been suspended. Verify to restore access.""",phishing
-"""Your account has detected unauthorized activity. Login now.""",phishing
-"""Your account information is outdated. Update it immediately.""",phishing
-"""Your service account requires confirmation to avoid closure.""",phishing
-"""Your account security alert requires your response.""",phishing
-"""Your login credentials must be confirmed today.""",phishing
-"""Your account has been frozen due to suspicious behavior.""",phishing
-"""Your account requires a security check before access is restored.""",phishing
-"""Your banking information needs verification immediately.""",phishing
-"""Your account has received a suspicious request. Confirm now.""",phishing
-"""Your account protection has expired. Renew your security settings.""",phishing
-"""Your online profile has been disabled. Verify your identity.""",phishing
-"""Your account has an important notification. Login to review.""",phishing
-"""Your payment details need confirmation before your next purchase.""",phishing
-"""Your account has been marked as unsafe. Secure it now.""",phishing
-"""Your account requires additional identity verification.""",phishing
-"""Your password has expired. Confirm a new password immediately.""",phishing
-"""Your account has unauthorized access. Change your credentials now.""",phishing
-"""Your bank account verification deadline is today.""",phishing
-"""Your account has been temporarily blocked for security reasons.""",phishing
-"""Your account requires confirmation through the security portal.""",phishing
-"""Your identity information must be verified to continue service.""",phishing
-"""Your account has a suspicious transaction waiting for approval.""",phishing
-"""Your online account has been compromised. Verify ownership now.""",phishing
-"""Your security verification has failed. Try again immediately.""",phishing
-"""Your account requires urgent action to prevent closure.""",phishing
-"""Your account access is limited until your information is confirmed.""",phishing
-"""Your email account requires security confirmation.""",phishing
-"""Your account has been selected for a mandatory security review.""",phishing
-"""Your bank requires additional verification for your safety.""",phishing
-"""Your account has a problem with payment authorization.""",phishing
-"""Your account has been blocked after unusual login activity.""",phishing
-"""Your account requires a new security confirmation code.""",phishing
-"""Your account information must be verified before the next login.""",phishing
-"""Your account has been reported for suspicious activity.""",phishing
-"""Your security alert requires immediate verification.""",phishing
-"""Your account access will expire without confirmation.""",phishing
-"""Your online service account requires urgent identity verification.""",phishing
-"""Your account has been temporarily suspended. Verify now.""",phishing
-"""Your banking session requires authentication again.""",phishing
-"""Your account has detected a suspicious payment attempt.""",phishing
-"""Your account recovery process is waiting for confirmation.""",phishing
-"""Your personal information requires security validation.""",phishing
-"""Your account needs immediate verification to remain active.""",phishing
-"""Your login attempt was blocked for security reasons.""",phishing
-"""Your account requires confirmation before processing requests.""",phishing
-"""Your account has an important security message.""",phishing
-"""Your account has been locked because of unusual behavior.""",phishing
-"""Your online banking access requires reactivation.""",phishing
-"""Your account has a security issue that needs fixing.""",phishing
-"""Your account verification link will expire soon.""",phishing
-"""Your account has suspicious login records. Review immediately.""",phishing
-"""Your account security update is incomplete.""",phishing
-"""Your payment information has to be confirmed again.""",phishing
-"""Your account has been temporarily restricted.""",phishing
-"""Your identity verification is required immediately.""",phishing
-"""Your account needs urgent protection from unauthorized access.""",phishing
-"""Your account details require confirmation today.""",phishing
+"Congratulations! You have won a free smartphone. Claim your prize now!",spam
+"Limited time offer! Get 70% discount on all products today.",spam
+"FREE voucher waiting for you. Click to redeem now!",spam
+"You are selected as our lucky winner. Reply YES to receive your gift.",spam
+"Exclusive promotion! Buy now and receive a special bonus.",spam
+"Earn extra income from home. No experience required!",spam
+"Congratulations! Your account has been chosen for a cash reward.",spam
+"Flash sale starts now! Save big on your favourite items.",spam
+"Get free shopping coupons today. Register immediately.",spam
+"Special offer only for you. Claim your reward before it expires.",spam
+"Win a brand new laptop by joining our lucky draw.",spam
+"Act fast! Free membership available for limited users.",spam
+"Your chance to receive RM500 cash is here. Apply now!",spam
+"Big discount alert! Purchase today and save more.",spam
+"Congratulations! You have unlocked a premium reward.",spam
+"Free tickets available now. Click to reserve your seat.",spam
+"Don't miss this amazing deal. Order before midnight.",spam
+"Lowest price guaranteed. Shop now and enjoy huge savings.",spam
+"Get a free gift with every purchase today.",spam
+"Exclusive customer reward available. Claim immediately.",spam
+"Limited offer! Subscribe now and get one month free.",spam
+"You have been selected for a special promotion.",spam
+"Receive cashback rewards when you register today.",spam
+"Buy one get one free offer starts now.",spam
+"Special clearance sale! Everything must go.",spam
+"Congratulations! You are eligible for a free holiday package.",spam
+"Earn money quickly with our online opportunity.",spam
+"Claim your free data package before it ends.",spam
+"New users receive a welcome bonus. Sign up today.",spam
+"Massive sale event! Prices reduced for a limited time.",spam
+"Get exclusive VIP access with your free membership.",spam
+"Your reward points can be exchanged for gifts now.",spam
+"Win exciting prizes by completing this short survey.",spam
+"Free movie subscription available. Activate today.",spam
+"Huge savings available. Shop our latest collection now.",spam
+"Special deal for selected customers only.",spam
+"Congratulations! You have received a shopping voucher.",spam
+"Join our giveaway and win amazing prizes.",spam
+"Limited stock available. Order yours before it sells out.",spam
+"Get RM100 instantly by downloading our application.",spam
+"Today's special offer cannot be missed.",spam
+"Unlock your exclusive discount code now.",spam
+"Free delivery promotion available this week only.",spam
+"Become a member today and receive rewards.",spam
+"Your lucky number has been selected. Claim your prize.",spam
+"Big promotion! Save up to 90% on selected items.",spam
+"Get instant approval for our special offer.",spam
+"Congratulations! You have won a shopping credit.",spam
+"Special bonus waiting for you. Click to collect.",spam
+"Limited invitation: Join our premium program today.",spam
+"Receive a free gift card by participating now.",spam
+"Exclusive online deal available for today only.",spam
+"Earn thousands monthly through our easy program.",spam
+"Your free coupon is ready. Redeem before expiry.",spam
+"Buy now and receive additional rewards.",spam
+"Super sale begins today. Don't miss the opportunity.",spam
+"Claim your free upgrade package now.",spam
+"Congratulations! You are one of our selected customers.",spam
+"Get a special discount by clicking this offer.",spam
+"Free trial available. Subscribe immediately.",spam
+"Save money with our amazing limited promotion.",spam
+"Receive bonus points after completing registration.",spam
+"Hot deal alert! Prices reduced for a short period.",spam
+"Join our reward program and get free benefits.",spam
+"Your exclusive coupon is waiting. Use it now.",spam
+"Special offer ends tonight. Purchase before deadline.",spam
+"Win cash prizes by entering our competition.",spam
+"Free accessories available for new customers.",spam
+"Get instant rewards after signing up today.",spam
+"Congratulations! Your name appears on our winner list.",spam
+"Claim your special package before someone else takes it.",spam
+"Online shopping festival starts now. Enjoy discounts.",spam
+"Receive a free bonus when you complete this offer.",spam
+"New promotion launched. Register to participate.",spam
+"Limited quantity available. Buy immediately.",spam
+"Get your free reward by replying YES now.",spam
+"Exclusive deal for loyal customers. Act today.",spam
+"Special announcement! You have received a reward.",spam
+"Free subscription offer available for a limited time.",spam
+"Increase your income with our simple online method.",spam
+"Congratulations! Collect your free electronics voucher.",spam
+"Discount code available. Use it before it expires.",spam
+"Don't wait! This amazing offer ends soon.",spam
+"Claim your bonus reward with one simple step.",spam
+"Special promotion for new members only.",spam
+"Win an iPhone by joining our giveaway today.",spam
+"Get free internet data by registering now.",spam
+"Exclusive shopping deal available immediately.",spam
+"Your chance to save money starts today.",spam
+"Receive a gift package after completing this form.",spam
+"Limited-time reward. Click now to claim.",spam
+"Huge discounts on electronics. Shop today.",spam
+"Congratulations! You have been selected for a prize.",spam
+"Free coupons available while supplies last.",spam
+"Special customer offer. Activate now.",spam
+"Earn rewards easily with our new program.",spam
+"Get cashback instantly after purchase.",spam
+"Last chance! Claim your free reward today.",spam
+"Congratulations! You have been chosen for our exclusive giveaway.",spam
+"Get your free Amazon gift card today. Claim before midnight.",spam
+"Amazing opportunity! Start earning money immediately.",spam
+"Special promotion! Enjoy massive discounts on selected products.",spam
+"Free reward available. Click the link to receive it now.",spam
+"Your lucky draw entry has been approved. Collect your prize.",spam
+"Limited offer! Get premium access at no cost.",spam
+"Save up to 80% with our special shopping event.",spam
+"Congratulations! A surprise gift is waiting for you.",spam
+"Earn cash rewards by completing simple online tasks.",spam
+"Exclusive offer for registered users. Join today.",spam
+"Free mobile data package available. Activate now.",spam
+"Hot deal! Purchase today and receive extra bonuses.",spam
+"Win exciting prizes in our monthly competition.",spam
+"Your reward coupon is about to expire. Redeem now.",spam
+"Special discount unlocked. Click to use your voucher.",spam
+"Get a free trial of our premium service today.",spam
+"Massive savings available only for a limited time.",spam
+"Congratulations! You are eligible for a special gift.",spam
+"Receive RM300 shopping credit by signing up now.",spam
+"New customers get free rewards instantly.",spam
+"Exclusive flash sale! Prices dropped today only.",spam
+"Claim your bonus points before they disappear.",spam
+"Free samples available. Request yours now.",spam
+"Don't miss this unbelievable promotion.",spam
+"Get instant cashback after registration.",spam
+"Congratulations! Your reward has been reserved.",spam
+"Special deal alert! Save more when you buy now.",spam
+"Win a luxury phone through our lucky draw.",spam
+"Free membership upgrade available today.",spam
+"Your special offer is ready. Click to activate.",spam
+"Earn extra income with our simple online system.",spam
+"Limited seats available. Register immediately.",spam
+"Exclusive invitation! Join our premium club.",spam
+"Free delivery and discounts available this week.",spam
+"Congratulations! You have received a bonus reward.",spam
+"Get unlimited access with our special package.",spam
+"Today only! Huge discount on all items.",spam
+"Your free voucher is waiting. Redeem now.",spam
+"Special customer promotion. Take advantage today.",spam
+"Win cash prizes instantly by joining our contest.",spam
+"New deal launched! Buy now before it ends.",spam
+"Get a surprise reward after completing this survey.",spam
+"Congratulations! You are among our top winners.",spam
+"Free upgrade offer available for selected users.",spam
+"Claim your shopping credits before the deadline.",spam
+"Exclusive sale event begins now.",spam
+"Save more money with our limited promotion.",spam
+"Get your bonus gift after a quick registration.",spam
+"Free entertainment subscription available now.",spam
+"Special offer! Receive additional benefits today.",spam
+"Your account has earned reward points. Exchange them now.",spam
+"Join our lucky draw and win amazing prizes.",spam
+"Big clearance sale! Everything must be sold.",spam
+"Earn money online without investment.",spam
+"Congratulations! Your free package is ready.",spam
+"Click now to unlock your special discount.",spam
+"Limited time bonus! Do not miss this chance.",spam
+"Get a free shopping voucher instantly.",spam
+"Exclusive online promotion for selected customers.",spam
+"Special reward program starts today.",spam
+"Win a free holiday trip by entering now.",spam
+"Your discount code has been generated.",spam
+"Get amazing prices on our latest products.",spam
+"Free bonus available for new registrations.",spam
+"Congratulations! You have won a special prize.",spam
+"Enjoy 50% off your next purchase today.",spam
+"Act quickly! This offer expires soon.",spam
+"Receive free gifts when you shop with us.",spam
+"Join today and unlock premium benefits.",spam
+"Special package available at a very low price.",spam
+"Get instant rewards by downloading our app.",spam
+"Exclusive deal created just for you.",spam
+"Your chance to win starts now.",spam
+"Limited promotion! Order before stock runs out.",spam
+"Free coupons are available for everyone.",spam
+"Earn rewards by inviting your friends.",spam
+"Congratulations! Your application for a reward was approved.",spam
+"Special discount waiting for you inside.",spam
+"Claim your free bonus before it is gone.",spam
+"Big savings event begins this weekend.",spam
+"Receive a gift card after completing registration.",spam
+"New users can get a welcome reward.",spam
+"Special offer! Buy more and save more.",spam
+"Free premium service for selected customers.",spam
+"Get your exclusive deal today.",spam
+"Reward notification: claim your prize now.",spam
+"Win exciting gifts through our online campaign.",spam
+"Limited-time coupon available now.",spam
+"Start earning additional income today.",spam
+"Your free item is waiting for confirmation.",spam
+"Special shopping event with huge discounts.",spam
+"Congratulations! You have been selected for a bonus.",spam
+"Activate your free membership now.",spam
+"Save money with this amazing offer.",spam
+"Receive a free gift after joining our program.",spam
+"Final reminder! Claim your promotion today.",spam
+"Get access to exclusive deals instantly.",spam
+"Flash promotion ends soon. Shop now.",spam
+"Your reward is ready. Confirm to receive it.",spam
+"Congratulations! You have unlocked a special reward today.",spam
+"Get 90% discount on our products. Shop immediately.",spam
+"Free bonus points are available. Redeem them now.",spam
+"Limited time deal! Purchase before the offer ends.",spam
+"Win a brand new device in our online giveaway.",spam
+"Your exclusive reward package is ready to collect.",spam
+"Join now and receive a welcome bonus instantly.",spam
+"Special offer for you! Click to claim your discount.",spam
+"Earn extra money with our easy online opportunity.",spam
+"Free shopping voucher available for selected users.",spam
+"Congratulations! Your prize notification has arrived.",spam
+"Get a free upgrade by activating this offer.",spam
+"Huge promotion! Save more when you order today.",spam
+"Your lucky reward is waiting. Claim it now.",spam
+"Exclusive member benefits available immediately.",spam
+"Free gifts available while supplies last.",spam
+"Special weekend sale! Enjoy amazing discounts.",spam
+"Congratulations! You have received a bonus coupon.",spam
+"Unlock premium features with our special deal.",spam
+"Claim your free package before it expires.",spam
+"Limited stock! Buy now before it is gone.",spam
+"Get cashback rewards from every purchase.",spam
+"Special invitation! Become a VIP customer today.",spam
+"Win exciting prizes by joining our campaign.",spam
+"Free internet package available. Register now.",spam
+"Congratulations! You are selected for a special offer.",spam
+"Save up to 75% with our latest promotion.",spam
+"Your discount voucher is ready to use.",spam
+"Act now and receive a free surprise gift.",spam
+"Exclusive sale event starts today.",spam
+"Earn rewards quickly with our new program.",spam
+"Get free access to premium services.",spam
+"Congratulations! Claim your free electronics gift.",spam
+"Special deal available only for today.",spam
+"Receive instant rewards after completing registration.",spam
+"Big announcement! A special reward is waiting.",spam
+"Get your free coupon by clicking now.",spam
+"New customers receive exclusive benefits.",spam
+"Limited offer! Subscribe and get extra rewards.",spam
+"Your bonus credit has been added. Use it now.",spam
+"Join our promotion and win amazing prizes.",spam
+"Free trial available. Start using it today.",spam
+"Congratulations! Your name has been selected.",spam
+"Special discount code available now.",spam
+"Get huge savings with this limited offer.",spam
+"Receive free gifts with your next purchase.",spam
+"Win cash prizes through our lucky draw.",spam
+"Exclusive promotion ends soon. Take action now.",spam
+"Your free reward is waiting for confirmation.",spam
+"Get instant approval for our special package.",spam
+"Limited time! Enjoy our biggest sale event.",spam
+"Congratulations! You have earned a free voucher.",spam
+"Free subscription available for new users.",spam
+"Increase your income with our simple method.",spam
+"Claim your reward points before they expire.",spam
+"Special offer unlocked for your account.",spam
+"Get a free gift card today.",spam
+"Massive discounts available on selected items.",spam
+"Your chance to win a prize is here.",spam
+"Exclusive customer reward program launched.",spam
+"Receive special bonuses when you register.",spam
+"Congratulations! Your reward has been approved.",spam
+"Save money today with our amazing deals.",spam
+"Free delivery offer available now.",spam
+"Join the competition and win great prizes.",spam
+"Limited promotion! Order quickly.",spam
+"Get your special coupon immediately.",spam
+"New reward system launched. Join today.",spam
+"Receive extra benefits by signing up.",spam
+"Congratulations! You are our lucky customer.",spam
+"Special discount available before midnight.",spam
+"Claim your free item now.",spam
+"Exclusive online offer created for you.",spam
+"Earn rewards from your daily activities.",spam
+"Free products available for early users.",spam
+"Big sale! Lowest prices guaranteed.",spam
+"Your special bonus is ready.",spam
+"Get unlimited benefits with our premium plan.",spam
+"Congratulations! You have won a special gift.",spam
+"Activate your reward account today.",spam
+"Free promotional items available now.",spam
+"Shop today and receive extra discounts.",spam
+"Limited-time giveaway starts now.",spam
+"Get your free voucher instantly.",spam
+"Special offer! Don't miss this opportunity.",spam
+"Receive cashback after completing your purchase.",spam
+"Win a smartphone by joining our contest.",spam
+"Your exclusive deal is waiting.",spam
+"Save more with our latest shopping event.",spam
+"Congratulations! You are eligible for a free reward.",spam
+"Get bonus points by registering today.",spam
+"Free membership invitation available.",spam
+"Claim your promotion before it ends.",spam
+"Special reward available for loyal customers.",spam
+"Earn money easily with our online service.",spam
+"Your gift package is ready to be collected.",spam
+"Big discount alert! Shop now.",spam
+"Receive a free upgrade immediately.",spam
+"Final chance! Claim your offer today.",spam
+"Your account has been suspended. Verify your identity immediately.",phishing
+"Security alert: suspicious login detected. Confirm your password now.",phishing
+"Your bank account requires urgent verification. Click the secure link.",phishing
+"Your email account will be closed unless you verify your information.",phishing
+"Unusual activity detected. Login now to secure your account.",phishing
+"Your password has expired. Reset it immediately using this link.",phishing
+"Microsoft security team: confirm your account details to continue.",phishing
+"Your Apple ID has been locked. Verify your information now.",phishing
+"Bank alert: Your account access is limited. Confirm your details.",phishing
+"We detected unauthorized activity. Please verify your account.",phishing
+"Your online banking session has expired. Re-login to continue.",phishing
+"Security warning: someone accessed your account. Change password now.",phishing
+"Your payment information needs to be updated to avoid suspension.",phishing
+"Your account will be permanently closed. Verify immediately.",phishing
+"Confirm your identity to prevent account restriction.",phishing
+"Your mailbox is full. Login to increase storage capacity.",phishing
+"Important notice: Your account requires security confirmation.",phishing
+"Your transaction was blocked. Verify your payment details.",phishing
+"Your bank detected suspicious activity. Follow the verification process.",phishing
+"Your profile information is incomplete. Update it now.",phishing
+"Your account has been compromised. Reset your password immediately.",phishing
+"Security check required. Confirm your login information.",phishing
+"Your credit card has been disabled. Update your details now.",phishing
+"Your subscription payment failed. Enter your card information again.",phishing
+"Your account access will expire today. Verify now.",phishing
+"Google security alert: suspicious sign-in detected on your account.",phishing
+"Your account has unusual login attempts. Secure your account now.",phishing
+"Confirm your password to restore account access.",phishing
+"Your online service account is at risk. Verify your identity.",phishing
+"Your banking profile needs confirmation immediately.",phishing
+"Security notification: Login from unknown device detected.",phishing
+"Your account has been restricted due to suspicious activity.",phishing
+"Verify your personal information to unlock your account.",phishing
+"Your payment method was rejected. Update your billing information.",phishing
+"Your account recovery requires identity verification.",phishing
+"Your email security settings need immediate confirmation.",phishing
+"Your account has been temporarily locked. Click to unlock.",phishing
+"Important security update required. Confirm your account details.",phishing
+"Your password reset request is pending. Verify now.",phishing
+"Your financial account needs verification to avoid closure.",phishing
+"Your login credentials may have been exposed. Change them now.",phishing
+"Your account protection has expired. Renew it immediately.",phishing
+"Your transaction requires additional verification.",phishing
+"Security alert from your bank. Confirm recent activity.",phishing
+"Your account will be deleted unless you verify your identity.",phishing
+"Your payment account has been blocked. Restore access now.",phishing
+"Your device has been linked to another account. Verify ownership.",phishing
+"Your email access has been limited. Confirm your details.",phishing
+"Suspicious activity detected on your account. Login to review.",phishing
+"Your security information needs updating. Complete verification.",phishing
+"Your account verification failed. Submit your details again.",phishing
+"Your bank requires confirmation of your personal information.",phishing
+"Your account has been accessed from an unknown location.",phishing
+"Your password must be updated due to security reasons.",phishing
+"Your account is under review. Verify your information now.",phishing
+"Confirm your identity to prevent unauthorized access.",phishing
+"Your service account will be suspended without verification.",phishing
+"Your payment details are outdated. Update them immediately.",phishing
+"Your account has a security problem. Follow the instructions.",phishing
+"Your login session expired. Sign in again to continue.",phishing
+"Your security verification is incomplete. Finish it now.",phishing
+"Your account needs urgent attention. Verify immediately.",phishing
+"Your personal details have not been confirmed. Update now.",phishing
+"Your online account has been flagged. Confirm ownership.",phishing
+"Your bank security team needs your verification response.",phishing
+"Your account recovery link is waiting. Confirm now.",phishing
+"Your identity verification failed. Submit documents again.",phishing
+"Your account protection requires immediate action.",phishing
+"Your email account has suspicious activity. Secure it now.",phishing
+"Your banking access has been disabled. Restore it immediately.",phishing
+"Your account information must be updated today.",phishing
+"Your security token has expired. Request a new one now.",phishing
+"Your account is temporarily unavailable. Verify to restore access.",phishing
+"Your payment was declined. Confirm your card details.",phishing
+"Your account has been selected for a security check.",phishing
+"Your login details need confirmation before continuing.",phishing
+"Your account has been marked as suspicious. Verify now.",phishing
+"Your online profile requires immediate verification.",phishing
+"Your account will lose access unless you confirm your identity.",phishing
+"Security notification: Please confirm your account information.",phishing
+"Your password recovery request requires verification.",phishing
+"Your account settings have changed. Confirm if this was you.",phishing
+"Your financial information requires security confirmation.",phishing
+"Your account has encountered a security issue. Login now.",phishing
+"Your account credentials need to be verified.",phishing
+"Your service access is limited. Update your information.",phishing
+"Your account has been frozen. Complete verification to unlock.",phishing
+"Your bank profile requires immediate confirmation.",phishing
+"Your email password needs renewal. Click to reset.",phishing
+"Your account has detected unusual activity. Verify now.",phishing
+"Your identity confirmation is required to continue using services.",phishing
+"Your account has expired. Reactivate it by verifying details.",phishing
+"Your security check failed. Confirm your information again.",phishing
+"Your account requires additional authentication.",phishing
+"Your payment account needs urgent verification.",phishing
+"Your login attempt was blocked. Confirm your identity.",phishing
+"Your account is at risk. Secure it immediately.",phishing
+"Your account details must be updated before access is removed.",phishing
+"Maybank security alert: Your account has unusual activity. Verify now.",phishing
+"Touch 'n Go eWallet: Your account is locked. Confirm your identity immediately.",phishing
+"Shopee security team: Your account requires verification to avoid suspension.",phishing
+"Grab account warning: Please confirm your payment information.",phishing
+"PayPal alert: Your account access has been restricted. Verify your details.",phishing
+"Apple ID security notice: Your account has been disabled. Restore access now.",phishing
+"Google account warning: Sign-in attempt detected. Confirm your identity.",phishing
+"Microsoft account alert: Your password needs immediate verification.",phishing
+"Netflix security notice: Update your payment details to continue service.",phishing
+"Amazon security alert: Verify your account information to prevent closure.",phishing
+"Your bank account has been frozen due to suspicious transactions.",phishing
+"Your online banking password has expired. Reset it immediately.",phishing
+"Security department requires your account verification within 24 hours.",phishing
+"Your payment card has been blocked. Confirm your details to unlock it.",phishing
+"Your e-wallet account needs identity verification before use.",phishing
+"Your account has detected suspicious login from another country.",phishing
+"Verify your banking information to avoid permanent account suspension.",phishing
+"Your account recovery process requires personal information confirmation.",phishing
+"Your email account has been hacked. Change your password immediately.",phishing
+"Your account security level is low. Upgrade protection now.",phishing
+"Your online shopping account has been compromised. Verify ownership.",phishing
+"Your wallet balance is frozen. Complete verification to restore access.",phishing
+"Your transaction is pending. Confirm your banking details.",phishing
+"Your account has failed security verification. Submit information again.",phishing
+"Your identity check is incomplete. Complete the process now.",phishing
+"Your card payment failed. Update your card information immediately.",phishing
+"Your account will be suspended due to incomplete verification.",phishing
+"Security alert: Unknown device signed into your account.",phishing
+"Your account requires two-factor authentication setup. Verify now.",phishing
+"Your login information has expired. Confirm your credentials.",phishing
+"Your account has been flagged for suspicious behavior.",phishing
+"Your bank needs additional information to approve your transaction.",phishing
+"Your online account will be deleted unless action is taken.",phishing
+"Your account access has been limited. Verify your personal details.",phishing
+"Your password reset link is ready. Confirm your account first.",phishing
+"Your account has a critical security issue. Login to fix it.",phishing
+"Your financial profile requires immediate verification.",phishing
+"Your payment method needs confirmation to avoid service interruption.",phishing
+"Your account ownership must be confirmed today.",phishing
+"Your security certificate has expired. Renew your account now.",phishing
+"Your account has been selected for mandatory verification.",phishing
+"Your login attempt requires confirmation. Verify immediately.",phishing
+"Your online service has detected unauthorized access.",phishing
+"Your account information does not match our records. Update now.",phishing
+"Your bank security team requests confirmation of your details.",phishing
+"Your account is temporarily disabled. Verify to reactivate.",phishing
+"Your payment account has suspicious activity. Review now.",phishing
+"Your email service requires password confirmation.",phishing
+"Your account has reached a security limit. Verify your identity.",phishing
+"Your account needs urgent recovery. Submit your details.",phishing
+"Your mobile banking access has been suspended. Restore it now.",phishing
+"Your account requires a security update before continuing.",phishing
+"Your identity verification expires today. Complete it immediately.",phishing
+"Your account has an unauthorized transaction. Confirm your information.",phishing
+"Your bank card security check requires verification.",phishing
+"Your account has been temporarily restricted. Click to unlock.",phishing
+"Your online profile needs confirmation due to security reasons.",phishing
+"Your account has suspicious activity from a new location.",phishing
+"Your payment details have changed. Confirm this update.",phishing
+"Your account protection needs renewal. Verify now.",phishing
+"Your service provider detected unusual account behavior.",phishing
+"Your account recovery requires a security code confirmation.",phishing
+"Your personal information needs updating to maintain access.",phishing
+"Your account login has been blocked. Confirm your identity.",phishing
+"Your financial account requires immediate action.",phishing
+"Your account has been locked after multiple failed attempts.",phishing
+"Your security settings require verification.",phishing
+"Your account access will expire soon. Confirm now.",phishing
+"Your payment account has been suspended temporarily.",phishing
+"Your account has been reported for suspicious activity.",phishing
+"Your bank requires confirmation before processing your transaction.",phishing
+"Your account details must be reviewed immediately.",phishing
+"Your email storage is full. Login to increase your limit.",phishing
+"Your account has a pending security review.",phishing
+"Your identity has not been verified. Complete the process.",phishing
+"Your account will be disabled if verification is not completed.",phishing
+"Your card information needs to be updated urgently.",phishing
+"Your online account requires a new security confirmation.",phishing
+"Your account has unauthorized access attempts. Secure it now.",phishing
+"Your password has been changed. Confirm if this was you.",phishing
+"Your account has a suspicious payment request.",phishing
+"Your banking session requires re-authentication.",phishing
+"Your account verification deadline is approaching.",phishing
+"Your account has been selected for security inspection.",phishing
+"Your login credentials are at risk. Update them now.",phishing
+"Your account requires identity confirmation to continue.",phishing
+"Your account has been blocked because of unusual activity.",phishing
+"Your security verification failed. Try again immediately.",phishing
+"Your payment information is incomplete. Update now.",phishing
+"Your account access is restricted until verification.",phishing
+"Your account has received a suspicious login alert.",phishing
+"Your online banking account needs confirmation.",phishing
+"Your account requires immediate security attention.",phishing
+"Your profile has been marked for review. Verify now.",phishing
+"Your account has expired. Reactivate it today.",phishing
+"Your account security check requires additional information.",phishing
+"Your account has a pending verification request.",phishing
+"Your account has been compromised. Take action immediately.",phishing
+"Your account has been flagged due to suspicious activity. Verify immediately.",phishing
+"Security warning: Your login details may have been stolen. Change your password now.",phishing
+"Your bank account requires confirmation before the transaction can proceed.",phishing
+"Your account access has been temporarily disabled. Verify your identity.",phishing
+"Your email account security has failed. Confirm your information now.",phishing
+"Your account has an unauthorized login attempt. Secure your account immediately.",phishing
+"Your payment has been declined. Update your billing information to continue.",phishing
+"Your account verification is incomplete. Complete the process today.",phishing
+"Your password reset request requires confirmation. Verify your account.",phishing
+"Your account will be closed due to inactivity. Login to reactivate it.",phishing
+"Your security information needs updating. Confirm your details now.",phishing
+"Your bank detected unusual activity. Review your account immediately.",phishing
+"Your account has been restricted. Submit your information to restore access.",phishing
+"Your online account requires urgent verification.",phishing
+"Your identity cannot be confirmed. Provide additional details now.",phishing
+"Your account has been accessed from an unknown device.",phishing
+"Your card has been blocked. Verify your payment details immediately.",phishing
+"Your account security requires immediate attention.",phishing
+"Your account has expired. Confirm your information to continue using services.",phishing
+"Your transaction requires additional security verification.",phishing
+"Your account has been locked. Click to unlock your access.",phishing
+"Your online banking requires a security update.",phishing
+"Your account details have changed. Confirm whether this was you.",phishing
+"Your login session is invalid. Sign in again to verify.",phishing
+"Your account is at risk. Complete verification now.",phishing
+"Your personal details need confirmation to prevent account suspension.",phishing
+"Your security code has expired. Request a new verification code.",phishing
+"Your account has a pending verification request. Complete it immediately.",phishing
+"Your payment account requires identity confirmation.",phishing
+"Your account has suspicious activity from a foreign location.",phishing
+"Your email password needs to be updated due to security concerns.",phishing
+"Your account has been compromised. Follow the recovery steps now.",phishing
+"Your account recovery requires confirmation of personal details.",phishing
+"Your bank profile needs to be verified before the deadline.",phishing
+"Your account access will be removed unless you verify now.",phishing
+"Your security settings have changed. Confirm your account details.",phishing
+"Your account has failed the security check. Verify again.",phishing
+"Your payment card information requires immediate update.",phishing
+"Your account has been placed under security review.",phishing
+"Your account requires authentication before continuing.",phishing
+"Your online wallet has been suspended. Verify to restore access.",phishing
+"Your account has detected unauthorized activity. Login now.",phishing
+"Your account information is outdated. Update it immediately.",phishing
+"Your service account requires confirmation to avoid closure.",phishing
+"Your account security alert requires your response.",phishing
+"Your login credentials must be confirmed today.",phishing
+"Your account has been frozen due to suspicious behavior.",phishing
+"Your account requires a security check before access is restored.",phishing
+"Your banking information needs verification immediately.",phishing
+"Your account has received a suspicious request. Confirm now.",phishing
+"Your account protection has expired. Renew your security settings.",phishing
+"Your online profile has been disabled. Verify your identity.",phishing
+"Your account has an important notification. Login to review.",phishing
+"Your payment details need confirmation before your next purchase.",phishing
+"Your account has been marked as unsafe. Secure it now.",phishing
+"Your account requires additional identity verification.",phishing
+"Your password has expired. Confirm a new password immediately.",phishing
+"Your account has unauthorized access. Change your credentials now.",phishing
+"Your bank account verification deadline is today.",phishing
+"Your account has been temporarily blocked for security reasons.",phishing
+"Your account requires confirmation through the security portal.",phishing
+"Your identity information must be verified to continue service.",phishing
+"Your account has a suspicious transaction waiting for approval.",phishing
+"Your online account has been compromised. Verify ownership now.",phishing
+"Your security verification has failed. Try again immediately.",phishing
+"Your account requires urgent action to prevent closure.",phishing
+"Your account access is limited until your information is confirmed.",phishing
+"Your email account requires security confirmation.",phishing
+"Your account has been selected for a mandatory security review.",phishing
+"Your bank requires additional verification for your safety.",phishing
+"Your account has a problem with payment authorization.",phishing
+"Your account has been blocked after unusual login activity.",phishing
+"Your account requires a new security confirmation code.",phishing
+"Your account information must be verified before the next login.",phishing
+"Your account has been reported for suspicious activity.",phishing
+"Your security alert requires immediate verification.",phishing
+"Your account access will expire without confirmation.",phishing
+"Your online service account requires urgent identity verification.",phishing
+"Your account has been temporarily suspended. Verify now.",phishing
+"Your banking session requires authentication again.",phishing
+"Your account has detected a suspicious payment attempt.",phishing
+"Your account recovery process is waiting for confirmation.",phishing
+"Your personal information requires security validation.",phishing
+"Your account needs immediate verification to remain active.",phishing
+"Your login attempt was blocked for security reasons.",phishing
+"Your account requires confirmation before processing requests.",phishing
+"Your account has an important security message.",phishing
+"Your account has been locked because of unusual behavior.",phishing
+"Your online banking access requires reactivation.",phishing
+"Your account has a security issue that needs fixing.",phishing
+"Your account verification link will expire soon.",phishing
+"Your account has suspicious login records. Review immediately.",phishing
+"Your account security update is incomplete.",phishing
+"Your payment information has to be confirmed again.",phishing
+"Your account has been temporarily restricted.",phishing
+"Your identity verification is required immediately.",phishing
+"Your account needs urgent protection from unauthorized access.",phishing
+"Your account details require confirmation today.",phishing
 I will send you the updated file after checking it.,ham
 The meeting has been scheduled for next Tuesday.,ham
 Can you help me review this document?,ham
@@ -793,7 +793,7 @@ Please contact me when you arrive.,ham
 The event information has been updated.,ham
 I will check the system logs tomorrow.,ham
 Your order confirmation has been received.,ham
-"Good afternoon, I have received your message.",ham
+Good afternoon, I have received your message.,ham
 I will update the report after reviewing the feedback.,ham
 The meeting room has been reserved for tomorrow.,ham
 Please send me the details when you are ready.,ham
@@ -895,6 +895,7 @@ I have saved the important documents.,ham
 Please inform the team about the changes.,ham
 The appointment reminder has been received.,ham
 I will continue working on the project tomorrow.,ham
+message,label
 Hello how are you today?,ham
 Can we meet after class tomorrow?,ham
 Please send me the assignment notes.,ham
@@ -925,11 +926,11 @@ The team approved your leave request for August.,ham
 I shared the folder with you on Google Drive.,ham
 Reminder: submit your timesheet by end of day.,ham
 Great job on the presentation today!,ham
-"""Congratulations! You won a free iPhone. Click now!""",spam
-"""FREE entry in our weekly prize draw, reply WIN now.""",spam
+"Congratulations! You won a free iPhone. Click now!",spam
+"FREE entry in our weekly prize draw, reply WIN now.",spam
 Limited offer: claim your cash reward today!,spam
 You have been selected as a lucky winner!,spam
-"""Act fast and get free vouchers now!!!""",spam
+"Act fast and get free vouchers now!!!",spam
 Call this number to collect your prize.,spam
 Exclusive deal! Buy now and save big.,spam
 You won a gift card. Click here to claim.,spam
@@ -956,9 +957,9 @@ Buy one get ten free. Limited stock available.,spam
 Congratulations on your cash prize of $2500!,spam
 Act now and receive a free smartphone upgrade.,spam
 Special promotion: zero interest for 12 months.,spam
-"""Your account is suspended. Verify at https://account-check.example""",phishing
-"""Security alert: confirm your password immediately.""",phishing
-"""We detected unusual login activity. Click https://secure-login.example""",phishing
+"Your account is suspended. Verify at https://account-check.example",phishing
+"Security alert: confirm your password immediately.",phishing
+"We detected unusual login activity. Click https://secure-login.example",phishing
 Your bank needs you to verify your account now.,phishing
 Update your payment details to avoid account closure.,phishing
 Microsoft support: call urgently to fix your computer.,phishing
