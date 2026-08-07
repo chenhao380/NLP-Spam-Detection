@@ -790,6 +790,7 @@ def render_hero(title: str = "EMAIL DETECTION", dark: bool = True, component_hei
     """
     components.html(html, height=component_height, scrolling=False)
 
+
 def apply_theme() -> None:
     st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
     st.session_state.dark_mode = True
@@ -837,6 +838,7 @@ def apply_theme() -> None:
         unsafe_allow_html=True,
     )
 
+
 @st.cache_resource
 def detector() -> SpamDetector:
     """Load an existing model, or train one automatically on first deployment."""
@@ -845,9 +847,11 @@ def detector() -> SpamDetector:
             train()
     return SpamDetector()
 
+
 @st.cache_data
 def metrics() -> dict:
     return json.loads(METRICS_PATH.read_text(encoding="utf-8")) if METRICS_PATH.exists() else {}
+
 
 def result_pdf(message: str, result: dict) -> bytes:
     """Make a small downloadable report for one result."""
@@ -879,6 +883,7 @@ def go_to(page_name: str) -> None:
     st.session_state.nav_page = page_name
     st.rerun()
 
+
 def home() -> None:
     st.markdown(
         """
@@ -896,6 +901,7 @@ def home() -> None:
     )
 
     render_hero("EMAIL DETECTION", dark=True)
+
 
 def analyze() -> None:
     st.title("Analyze Message")
@@ -1029,6 +1035,7 @@ def analyze() -> None:
         "application/pdf"
     )
 
+
 def dashboard() -> None:
     st.title("Statistics Dashboard")
     data, info, history = pd.read_csv(DATASET_PATH), metrics(), load_history()
@@ -1046,6 +1053,7 @@ def dashboard() -> None:
     else:
         st.info("Analyse messages to populate prediction activity charts.")
 
+
 def history_page() -> None:
     st.title("Prediction History")
     history = load_history()
@@ -1057,6 +1065,7 @@ def history_page() -> None:
     if st.button("Delete all history"):
         clear_history()
         st.rerun()
+
 
 def about() -> None:
     st.title("About")
@@ -1104,6 +1113,7 @@ def about() -> None:
 
     st.write("This educational project compares Multinomial Naive Bayes, Logistic Regression, and SVM on TF-IDF features. The best weighted-F1 model is saved locally.")
     st.warning("Predictions are decision support, not a replacement for security controls. Do not open unexpected links or disclose credentials.")
+
 
 apply_theme()
 
